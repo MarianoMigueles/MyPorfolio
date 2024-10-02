@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reemplazar Palabra</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Reemplazar Palabra</h1>
+
+    <label for="textAreaInput">Texto:</label>
+    <textarea id="textAreaInput" placeholder="Ingresa el texto aquí..."></textarea>
+
+    <br>
+
+    <label for="wordToReplace">Palabra a reemplazar:</label>
+    <input type="text" id="wordToReplace" placeholder="Ingresa la palabra a reemplazar">
+
+    <br><br>
+
+    <button onclick="replaceWord()">Reemplazar</button>
+
+    <h2>Texto Resultante:</h2>
+    <textarea id="textAreaOutput" readonly></textarea>
+
+    <script>
+        function replaceWord() {
+            // Obtener el texto del textarea y la palabra a reemplazar
+            const textAreaInput = document.getElementById('textAreaInput').value;
+            const wordToReplace = document.getElementById('wordToReplace').value;
+
+            // Reemplazar la palabra especificada por nada
+            const resultText = textAreaInput.split(wordToReplace).join('');
+
+            // Mostrar el texto resultante en el textarea de salida
+            document.getElementById('textAreaOutput').value = resultText;
+        }
+    </script>
+
+</body>
+</html>

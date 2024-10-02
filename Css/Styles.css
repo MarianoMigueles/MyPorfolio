@@ -1,0 +1,472 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap');
+
+:root {
+    /*Colors*/
+    --clr-Primary: #0D0D0D;
+    --clr-Scondary: #F7EFEB;
+    --clr-Blur: #0D0D0D25;
+
+    /*Js*/
+    --js-Scroll-Background-Animation: 0px;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100vw;
+    height: 100vh;
+
+    color: var(--clr-Primary);
+    background-color: var(--clr-Scondary);
+    overflow-y: hidden;
+}
+
+header {
+    height: 100%;
+}
+
+button {
+    width: fit-content;
+    height: fit-content;
+
+    border: none;
+    padding: 0 20px;
+    outline: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.general-button-style {
+    font-family: 'Permanent Marker', cursive;
+    text-transform: uppercase;
+    color: inherit;
+    border: 2px solid var(--clr-Primary);
+    background-color: var(--clr-secondary);
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*Lateral Bar*/
+/*----------------------------------------------------------------------------------------*/
+
+.lateral-bar-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 10px;
+    height: 100%;
+    background-color: var(--clr-Scondary);
+    border-right: 2px solid var(--clr-Primary);
+    box-shadow: 2.5px 0 4px var(--clr-Blur);
+    z-index: 1000;
+}
+
+.main-navigator-buttons-contaier {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    right: -.4em;
+    width: fit-content;
+    height: 100%;
+    max-height: 42em;
+    padding: .7em 0;
+}
+
+.lateral-bar-button-style {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    width: 1.5em;
+    height: 4.5em;
+    background-color: var(--clr-Primary);
+    padding: 0;
+    box-shadow: 2.5px 0 4px var(--clr-Blur);
+    transition: all .3s ease-in-out;
+}
+
+.lateral-bar-button-style.active,
+ .lateral-bar-button-style:hover {
+    width: 2.5em;
+}
+
+.lateral-bar-button-style.menu-button {
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.lateral-bar-button-style.menu-button > span {
+    color: var(--clr-Scondary);
+}
+
+.lateral-bar-button-style > span.button-content {
+    position: absolute;
+    font-family: 'Bangers', cursive;
+    text-transform: uppercase;
+    color: var(--clr-Scondary);
+    transform: rotate(-90deg);
+    transform-origin: center center;
+}
+
+.social-buttons-container {
+    position: absolute;
+    bottom: .7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+
+    background-color: var(--clr-Scondary);
+    border: 1px solid var(--clr-Primary);
+    padding: 2px;
+}
+
+.social-buttons-container > a {
+    width: fit-content;
+    height: fit-content;
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*Main*/
+/*----------------------------------------------------------------------------------------*/
+
+main {
+    position: relative;
+
+    height: 653px;
+
+    overflow-x: scroll;
+    overflow-y: hidden;
+
+    display: grid;
+    grid-template-columns: repeat(4, 649px);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 1em;
+
+    padding-left: 100px;
+    z-index: 100;
+}
+
+main::before {
+    content: "";
+    position: absolute;
+    
+    top: 0;
+    left: 4%;
+    width: 2000px;
+    height: 100%;
+
+    background-image: url("/Assets/Svg/Background/BackgroundBranch.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .7;
+
+    z-index: -1;
+}
+
+main > section {
+    position: relative;
+    grid-row: 2 / span 3;
+}
+
+.global-container-decoration {
+    border: 2px solid var(--clr-Primary);
+}
+
+.global-container-decoration:hover {
+    transform: scale(1.03);
+    transition: all .3s ease-in-out;
+    background-color: var(--clr-Scondary);
+}
+
+.icon {
+    width: 2.5em;
+    height: 2.5em;
+}
+
+main p {
+    font-size: clamp(1rem, 90%, 1.5rem);
+}
+
+.large-text {
+    font-size: clamp(1.5rem, 4vw + 1rem, 2.5rem);
+    letter-spacing: 2px;
+}
+
+.medium-text {
+    font-size: clamp(1.2rem, 70%, 2rem);
+}
+
+main p.oswald, .large-text.oswald, .medium-text.oswald {
+    font-family: 'Oswald', sans-serif;
+}
+
+main p.bangers, .large-text.bangers, .medium-text.bangers {
+    font-family: 'Bangers', cursive;
+}
+
+main p.permanent-marker, .large-text.permanent-marker, .medium-text.permanent-marker {
+    font-family: 'Permanent Marker', cursive;
+}
+
+.decorating-text {
+    position: absolute;
+    width: 25px;
+    font-weight: bold;
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*About Section*/
+/*----------------------------------------------------------------------------------------*/
+
+section.about > * {
+    position: absolute;
+}
+
+.about-info {
+    position: relative;
+    top: -1em;
+    max-width: 20em;
+    height: fit-content;
+    padding: 10px 5px;
+}
+
+.about-info p .large-text {
+    position: relative;
+    transform: rotate(-90deg);
+    font-family: 'bangers', cursive;
+    float: left; 
+    margin: 0 5px; 
+}
+
+.about-decorating-img {
+    position: absolute;
+    bottom: 1%;
+    right: 45%;
+    max-width: 13em;
+    min-width: 9.5em;
+}
+
+.about-decorating-img > img {
+    width: 100%;
+}
+
+.about-avatar {
+    position: relative;
+    right: 1em;
+    bottom: -1em;
+    width: 40%;
+    height: 70%;
+    padding: 5px;
+}
+
+.about-avatar {
+    h2 {
+        position: absolute;
+        font-size: clamp(1.5rem, 50%, 2.5rem);
+    }
+
+    h2:nth-child(1) {
+        top: 5px;
+        left: 5px;
+    }
+
+    h2:nth-child(2) {
+        bottom: 5px;
+        right: 5px;
+    }
+    
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*Studies Section*/
+/*----------------------------------------------------------------------------------------*/
+
+.knowledge-dedication {
+    bottom: 0;
+}
+
+.knowledge {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+}
+
+/* <-- Studies Section --> */
+
+.study-item-container {
+    position: relative;
+    width: fit-content;
+    height: 100%;
+    margin-right: 240px;
+}
+
+.study-item {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px;
+}
+
+.study-item-container div:first-child {
+    top: -1em;
+    left: -55%;
+
+    img {
+        max-width: 200px;
+    }
+}
+
+.study-item-container div:last-child {
+    position: relative;
+    left: 25%;
+
+    img {
+        max-width: 160px;
+    }
+}
+
+.study-item-container div:last-child::before {
+    content: "B1";
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-family: 'oswald', sans-serif;
+    border: 2px solid var(--clr-Primary);
+    padding: 2px 6px;
+}
+
+.study-item-container div:last-child::after {
+    content: "English";
+    position: absolute;
+    bottom: 20px;
+    right: -40px;
+    font-family: 'perma-marker', cursive;
+    font-weight: bold;
+    font-style: italic;
+    transform: rotate(90deg);
+}
+
+/* <-- Skills Section --> */
+
+.skills-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+.skills-container h2 {
+    position: absolute;
+    bottom: 0;
+    left: -50%;
+}
+
+.skills-container ul:nth-child(2) {
+    top: 10%;
+}
+
+.skills-container ul:nth-child(3) {
+    top: 30%;
+}
+
+.skill-list-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    gap: 20px;
+    padding: 20px 5px;
+}
+
+.skill-list-container li {
+    width: fit-content;
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*Projects Section*/
+/*----------------------------------------------------------------------------------------*/
+
+section.projects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+}
+
+.projects > h1 {
+    position: relative;
+}
+
+/*  */
+
+.project-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    width: fit-content;
+    height: 100%;
+}
+
+.project-item {
+    position: relative;
+    display: flex;
+    gap: 14px;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    border: none;
+}
+
+.project-item:nth-child(2) {
+    right: -50px;
+}
+
+.project-item:nth-child(3) {
+    left: -50px;
+}
+
+.project-item:hover {
+    border: 2px solid var(--clr-Primary);
+    transform: scale(1.2);
+}
+
+.project-item:hover .project-image-container {
+    border: none;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.project-item h1 {
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+    font-family: 'Permanent Marker', cursive;
+    letter-spacing: 0;
+}
+
+.project-image-container {
+    width: 126px;
+    height: 126px;
+}
+
+
+
+
