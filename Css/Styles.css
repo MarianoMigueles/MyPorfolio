@@ -7,13 +7,14 @@
     --clr-Blur: #0D0D0D25;
 
     /*Js*/
-    --js-Scroll-Background-Animation: 0px;
+    --js-Scroll-Background-Animation: 100px;
 }
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    touch-action: pan-x;
 }
 
 body {
@@ -53,6 +54,7 @@ ul, li {
     color: inherit;
     border: 2px solid var(--clr-Primary);
     background-color: var(--clr-secondary);
+    cursor: pointer;
 }
 
 /*----------------------------------------------------------------------------------------*/
@@ -165,14 +167,16 @@ main::before {
     position: absolute;
     
     top: 0;
-    left: 4%;
-    width: 2000px;
+    left: 180px;
+    width: var(--js-Scroll-Background-Animation);
     height: 100%;
+    transition: width 1s ease;
 
-    background-image: url("/Assets/Svg/Background/BackgroundBranch.svg");
+    background-image: linear-gradient(to right, transparent 95%, var(--clr-Scondary) 100%), 
+    url("/Assets/Svg/Background/BackgroundBranch.svg");
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: .7;
+    opacity: .5;
 
     z-index: -1;
 }
@@ -186,7 +190,7 @@ main > section {
     border: 2px solid var(--clr-Primary);
 }
 
-.global-container-decoration:hover {
+.general-button-style:hover, .global-container-decoration:hover {
     transform: scale(1.03);
     transition: all .3s ease-in-out;
     background-color: var(--clr-Scondary);
@@ -224,8 +228,9 @@ main p.permanent-marker, .large-text.permanent-marker, .medium-text.permanent-ma
 
 .decorating-text {
     position: absolute;
-    width: 25px;
+    width: 15px;
     font-weight: bold;
+    word-wrap: break-word;
 }
 
 /*----------------------------------------------------------------------------------------*/
@@ -295,10 +300,6 @@ section.about > * {
 /*Studies Section*/
 /*----------------------------------------------------------------------------------------*/
 
-.knowledge-dedication {
-    bottom: 0;
-}
-
 .knowledge {
     display: flex;
     flex-direction: row;
@@ -313,6 +314,33 @@ section.about > * {
     height: 100%;
     margin-right: 240px;
 }
+
+.knowledge-dedication-container {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+    transition: opacity delay .3s;
+    cursor: default;
+}
+
+.knowledge-dedication-container:hover
+ .knowledge-dedication {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+ }
+
+ .knowledge-dedication-container:hover
+ .knowledge-dedication-translated:nth-child(2) {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.knowledge-dedication-container
+ .knowledge-dedication-translated:nth-child(2) {
+    opacity: 0;
+    top: 30%;
+    left: 5px;
+} 
 
 .study-item {
     position: relative;
@@ -407,20 +435,45 @@ section.projects {
     margin-left: 50px;
 }
 
-.projects > h1 {
-    position: relative;
+section.projects > h1 {
+    position: absolute;
+    text-align: center;
 }
 
-/*  */
+section.projects {
+
+    h1:nth-child(2) {
+        top: -19%;
+        right: 10%;
+    }
+
+    h1:nth-child(3) {
+        bottom: 10%;
+        right: 0;
+    }
+
+}
+
+section.projects button:nth-child(4) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* <-- Projects Section --> */
 
 .project-container {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    top: -12%;
+    gap: 10px;
 
     width: fit-content;
     height: 100%;
+
+    cursor: pointer;
 }
 
 .project-item {
@@ -433,6 +486,10 @@ section.projects {
     border: none;
 }
 
+.project-item h1, .project-item span {
+    opacity: 0;
+}
+
 .project-item:nth-child(2) {
     right: -50px;
 }
@@ -443,11 +500,13 @@ section.projects {
 
 .project-item:hover {
     border: 2px solid var(--clr-Primary);
-    transform: scale(1.2);
 }
 
-.project-item:hover .project-image-container {
-    border: none;
+.project-item:hover {
+    .project-image-container, h1, span {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
 }
 
 .text-container {
@@ -457,7 +516,7 @@ section.projects {
 }
 
 .project-item h1 {
-    font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+    font-size: clamp(1.5rem, 2vw, 2.5rem);
     font-family: 'Permanent Marker', cursive;
     letter-spacing: 0;
 }
