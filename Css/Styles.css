@@ -173,7 +173,7 @@ main::before {
     transition: width 1s ease;
 
     background-image: linear-gradient(to right, transparent 95%, var(--clr-Scondary) 100%), 
-    url("Assets/Svg/Background/BackgroundBranch.svg");
+    url("../Assets/Svg/Background/BackgroundBranch.svg");
     background-repeat: no-repeat;
     background-size: cover;
     opacity: .5;
