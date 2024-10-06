@@ -52,8 +52,8 @@ let sumValue = 150;
 let subtractionValue = 100;
 
 if(window.innerWidth < 600) {
-    sumValue = 20;
-    subtractionValue = 20;
+    sumValue = 5;
+    subtractionValue = 5;
 }
 
 function scrollBackgroundAnimation(deltaY) {
@@ -65,8 +65,8 @@ function scrollBackgroundAnimation(deltaY) {
 
     console.log(backgroundSize);
 
-    if(backgroundSize > 2000) {
-      backgroundSize = 2000;
+    if(backgroundSize > 2100) {
+      backgroundSize = 2100;
     }
 
     if(backgroundSize < 100) {
