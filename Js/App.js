@@ -1,3 +1,7 @@
+import { initNavigator } from './AppNavigation.js';
+
+initNavigator();
+
 window.addEventListener('wheel', function(e) {
     if (e.deltaY !== 0) {
       e.preventDefault();
@@ -65,8 +69,8 @@ function scrollBackgroundAnimation(deltaY) {
 
     console.log(backgroundSize);
 
-    if(backgroundSize > 2100) {
-      backgroundSize = 2100;
+    if(backgroundSize > 1990) {
+      backgroundSize = 1990;
     }
 
     if(backgroundSize < 100) {

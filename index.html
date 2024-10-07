@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Css/Styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <script defer src="Js/App.js"></script>
+    <script defer type="module" src="Js/App.js"></script>
     <title>Mariano Migueles</title>
 </head>
 <body>
     <header>
         <section class="lateral-bar-container">
             <nav class="main-navigator-buttons-contaier">
-                <button class="lateral-bar-button-style menu-button">
+                <a href="#" class="lateral-bar-button-style menu-button">
                     <span class="material-symbols-outlined">menu</span>
-                </button>
-                <button class="lateral-bar-button-style">
+                </a>
+                <a href="#about-section" class="lateral-bar-button-style">
                     <span class="button-content">About</span>
-                </button>
-                <button class="lateral-bar-button-style">
+                </a>
+                <a href="#knowledge-section" class="lateral-bar-button-style">
                     <span class="button-content">Studies</span>
-                </button>
-                <button class="lateral-bar-button-style">
+                </a>
+                <a href="#projects-section" class="lateral-bar-button-style">
                     <span class="button-content">Projects</span>
-                </button>
-                <button class="lateral-bar-button-style">
+                </a>
+                <a href="#info-section" class="lateral-bar-button-style">
                     <span class="button-content">Info</span>
-                </button>
+                </a>
                 <div class="social-buttons-container">
                     <a href="">
                         <img class="social-icon" src="Assets/Svg/Icons/LinkEdin.svg" alt="LinkEdin button">
@@ -45,7 +45,7 @@
         </section>
     </header>
     <main>
-        <section class="about">
+        <section id="about-section" class="about">
             <div class="about-info global-container-decoration">
                 <p class="oswald"><span class="large-text">Me</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis tempor sapien.  Mauris leo dui, dignissim a elit volutpat, tristique congue elit. Nullam id nibh pulvinar massa condimentum gravida ut et neque. Praesent scelerisque metus id urna porttitor pellentesque. Vivamus eleifend tortor varius libero ultrices, eget viverra tortor imperdiet.</p>
             </div>
@@ -57,7 +57,7 @@
                 <h2>ミジェレス</h2>
             </div>
         </section>
-        <section class="knowledge">
+        <section id="knowledge-section" class="knowledge">
             <section class="study-item-container">
                 <div class="study-item global-container-decoration">
                     <img class="svg" src="Assets/Svg/Logos/ISTEA-Logo.svg" alt="Logo de Istea">
@@ -140,7 +140,7 @@
                 </ul>      
             </section>
         </section>
-        <section class="projects">
+        <section id="projects-section" class="projects active">
             <div class="project-container">
                 <div class="project-item global-container-decoration">
                     <div class="text-container">
@@ -171,9 +171,9 @@
                 </div>
             </div>
             <h1 class="large-text bangers">Projects</h1>
-            <button class="general-button-style medium-text">see more</button>
+            <button class="medium-text">see more</button>
         </section>
-        <section class="info">
+        <section id="info-section" class="info">
             <div class="text-info-container">
                 <div class="text-japanese-info-container">
                     <span class="medium-text decorating-text">想像できるかい？</span>
@@ -182,6 +182,10 @@
                 <h1 class="medium-text permanent-marker decorating-text">¿Puedes imaginarlo?</h1>
                 <h1 class="medium-text permanent-marker">Puedes programarlo</h1>       
             </div>
+            <a href="#about-section" class="return-button">
+                <span>Volver</span>
+                <img src="Assets/Svg/Icons/ArrowButtonStyle.svg" alt="Arrow button">
+            </a>
         </section>            
     </main>
 </body>

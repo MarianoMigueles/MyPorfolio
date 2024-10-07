@@ -3,7 +3,7 @@
 :root {
     /*Colors*/
     --clr-Primary: #0D0D0D;
-    --clr-Scondary: #F7EFEB;
+    --clr-Secondary: #F7EFEB;
     --clr-Blur: #0D0D0D25;
 
     /*Js*/
@@ -17,6 +17,7 @@
     touch-action: pan-x;
 }
 
+
 body {
     position: relative;
     display: flex;
@@ -27,12 +28,16 @@ body {
     height: 100vh;
 
     color: var(--clr-Primary);
-    background-color: var(--clr-Scondary);
+    background-color: var(--clr-Secondary);
     overflow-y: hidden;
 }
 
 header {
     height: 100%;
+}
+
+ul, li {
+    list-style: none;
 }
 
 button {
@@ -42,19 +47,18 @@ button {
     border: none;
     padding: 0 20px;
     outline: none;
-}
 
-ul, li {
-    list-style: none;
-}
-
-.general-button-style {
     font-family: 'Permanent Marker', cursive;
     text-transform: uppercase;
     color: inherit;
     border: 2px solid var(--clr-Primary);
-    background-color: var(--clr-secondary);
+    background-color: var(--clr-Secondary);
     cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /*----------------------------------------------------------------------------------------*/
@@ -67,7 +71,7 @@ ul, li {
     align-items: center;
     width: 10px;
     height: 100%;
-    background-color: var(--clr-Scondary);
+    background-color: var(--clr-Secondary);
     border-right: 2px solid var(--clr-Primary);
     box-shadow: 2.5px 0 4px var(--clr-Blur);
     z-index: 1000;
@@ -110,14 +114,14 @@ ul, li {
 }
 
 .lateral-bar-button-style.menu-button > span {
-    color: var(--clr-Scondary);
+    color: var(--clr-Secondary);
 }
 
 .lateral-bar-button-style > span.button-content {
     position: absolute;
     font-family: 'Bangers', cursive;
     text-transform: uppercase;
-    color: var(--clr-Scondary);
+    color: var(--clr-Secondary);
     transform: rotate(-90deg);
     transform-origin: center center;
 }
@@ -131,7 +135,7 @@ ul, li {
     align-items: center;
     gap: .5em;
 
-    background-color: var(--clr-Scondary);
+    background-color: var(--clr-Secondary);
     border: 1px solid var(--clr-Primary);
     padding: 2px;
 }
@@ -148,9 +152,10 @@ ul, li {
 main {
     position: relative;
 
-    height: 653px;
+    height: 100%;
+    max-height: 700px;
 
-    overflow-x: scroll;
+    overflow-x: hidden;
     overflow-y: hidden;
 
     display: grid;
@@ -165,16 +170,18 @@ main::before {
     content: "";
     position: absolute;
     
-    top: 0;
+    top: 50%;
     left: 180px;
     width: var(--js-Scroll-Background-Animation);
-    height: 100%;
+    height: 90%;
+    transform: translateY(-50%);
     transition: width 1s ease;
 
-    background-image: linear-gradient(to right, transparent 95%, var(--clr-Scondary) 100%), 
+    background-image: linear-gradient(to right, transparent 95%, var(--clr-Secondary) 100%), 
     url("../Assets/Svg/Background/BackgroundBranch.svg");
     background-repeat: no-repeat;
     background-size: cover;
+
     opacity: .5;
 
     z-index: -1;
@@ -187,12 +194,12 @@ main > section {
 
 .global-container-decoration {
     border: 2px solid var(--clr-Primary);
+    background-color: var(--clr-Secondary);
 }
 
-.general-button-style:hover, .global-container-decoration:hover {
+button:hover, .global-container-decoration:hover {
     transform: scale(1.03);
     transition: all .3s ease-in-out;
-    background-color: var(--clr-Scondary);
 }
 
 .icon {
@@ -448,7 +455,7 @@ section.projects {
     display: flex;
     justify-content: start;
     align-items: center;
-    margin-left: 50px;
+    margin-left: 100px;
 }
 
 section.projects > h1 {
@@ -488,6 +495,7 @@ section.projects button {
     height: fit-content;
     padding: 10px;
     border: none;
+    background-color: transparent;
 }
 
 .project-item h1, .project-item span {
@@ -506,17 +514,18 @@ section.projects button {
 }
 
 
-section.projects:hover {
+section.projects.active {
 
     .project-item {
         border: 2px solid var(--clr-Primary);
+        background-color: var(--clr-Secondary);
     }
 
     .project-image-container, h1, span {
         width: 150px; 
         opacity: 1;
         transition: opacity 1s ease-in, width 1s ease-out;
-        border: none; 
+        border: none;
     }
 }
 
@@ -540,6 +549,10 @@ section.projects:hover {
 /*Info Section*/
 /*----------------------------------------------------------------------------------------*/
 
+section.info {
+    min-width: 600px;
+    margin-left: 150px;
+}
 
 section.info > div {
     position: relative;
@@ -580,6 +593,26 @@ section.info > div {
     left: 10%;
     letter-spacing: 10px;
 }
+
+.return-button {
+    position: absolute;
+    width: 120px;
+    bottom: -38%;
+    right: 3%;
+}
+
+.return-button span {
+    top: 18%;
+    right: 25%;
+    position: absolute;
+    transform: rotate(-40deg);
+    font-family: 'Permanent Marker', cursive;
+}
+
+.return-button img {
+    width: 100%;
+}
+
 
 
 
