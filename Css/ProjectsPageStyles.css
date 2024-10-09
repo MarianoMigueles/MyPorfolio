@@ -1,0 +1,80 @@
+@import url(Styles.css);
+
+body {
+    overflow-y: scroll;
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*Lateral Bar*/
+/*----------------------------------------------------------------------------------------*/
+
+.social-button-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+    width: fit-content;
+    height: 100%;
+    gap: 50px;
+    margin-left: 5px;
+}
+
+.social-button-container ul {
+    gap: 2em;
+}
+
+.social-item {
+    width: 34px;
+    height: 34px;
+}
+
+.return-button {
+    max-width: 80px;
+}
+
+/*----------------------------------------------------------------------------------------*/
+/*Projects*/
+/*----------------------------------------------------------------------------------------*/
+
+main {
+    width: 100%;
+    padding: 30px;
+}
+
+main > h1 {
+    margin: 0 0 30px 50px;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5vw;
+    padding: 0 50px;
+}
+
+.project-item {
+    min-width: 150px;
+    max-width: 229px;
+    padding: 0 5px 5px 5px;
+    box-shadow: 4px 4px 2px var(--clr-blur);
+}
+
+.project-item:hover {
+    box-shadow: none;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;   
+}
+
+.bottom-container span {
+    position: relative;
+    height: fit-content;
+}
+
+.bottom-container .project-play-button {
+    display: flex;
+}
+
+

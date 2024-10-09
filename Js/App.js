@@ -51,6 +51,7 @@ function backgroundScroll(deltaY) {
       smoothScroll();
 }
 
+const main = document.querySelector('main');
 let backgroundSize = 100;
 let sumValue = 150;
 let subtractionValue = 100;
@@ -77,6 +78,6 @@ function scrollBackgroundAnimation(deltaY) {
       backgroundSize = 100;
     }
 
-    document.documentElement.style.setProperty('--js-Scroll-Background-Animation', backgroundSize + 'px');
+    main.style.setProperty('--js-scroll-background-width', backgroundSize + 'px');
 }
   

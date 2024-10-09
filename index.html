@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Css/Styles.css">
+    <link rel="stylesheet" href="Css/MainPageStyles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <script defer type="module" src="Js/App.js"></script>
     <title>Mariano Migueles</title>
@@ -47,14 +47,16 @@
     <main>
         <section id="about-section" class="about">
             <div class="about-info global-container-decoration">
-                <p class="oswald"><span class="large-text">Me</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis tempor sapien.  Mauris leo dui, dignissim a elit volutpat, tristique congue elit. Nullam id nibh pulvinar massa condimentum gravida ut et neque. Praesent scelerisque metus id urna porttitor pellentesque. Vivamus eleifend tortor varius libero ultrices, eget viverra tortor imperdiet.</p>
+                <p class="oswald"><span>Me</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis tempor sapien.  Mauris leo dui, dignissim a elit volutpat, tristique congue elit. Nullam id nibh pulvinar massa condimentum gravida ut et neque. Praesent scelerisque metus id urna porttitor pellentesque. Vivamus eleifend tortor varius libero ultrices, eget viverra tortor imperdiet.</p>
             </div>
             <div class="about-decorating-img">
                 <img src="Assets/Images/Anime-Face.png" alt="Anime Face">
             </div>  
             <div class="about-avatar global-container-decoration">
-                <h2>マリアーノ</h2>
-                <h2>ミジェレス</h2>
+                <span class="name">Mariano</span>
+                <span class="name">マリアーノ</span>
+                <span class="last-name">Migueles</span>
+                <span class="last-name">ミジェレス</span>
             </div>
         </section>
         <section id="knowledge-section" class="knowledge">
@@ -63,15 +65,15 @@
                     <img class="svg" src="Assets/Svg/Logos/ISTEA-Logo.svg" alt="Logo de Istea">
                 </div>
                 <div class="knowledge-dedication-container">
-                    <span class="medium-text knowledge-dedication">私はプログラマーです</span>
-                    <span class="medium-text bangers decorating-text knowledge-dedication-translated">Soy Programador</span>
+                    <span class="knowledge-dedication">私はプログラマーです</span>
+                    <span class="bangers decorating-text knowledge-dedication-translated">Soy Programador</span>
                 </div>
                 <div class="study-item global-container-decoration">
                     <img class="svg" src="Assets/Svg/Logos/CulturalInglesa-Logo.svg" alt="Logo de Cultural inglesa">
                 </div>
             </section>
             <section class="skills-container">
-                <h2 class="large-text bangers">Knowledges</h2>
+                <h2 class="bangers">Knowledges</h2>
                 <ul class="skill-list-container global-container-decoration">
                     <li>
                         <a href="https://github.com">
@@ -137,56 +139,56 @@
                             <img class="icon" src="Assets/Svg/Icons/Cv.svg" alt="CV logo">
                         </a>
                     </li>
-                </ul>      
+                </ul>
             </section>
         </section>
         <section id="projects-section" class="projects active">
+            <h2 class="bangers">Proyectos</h2>
             <div class="project-container">
                 <div class="project-item global-container-decoration">
                     <div class="text-container">
-                        <h1 class="permanent-marker">Project Title</h1>
-                        <span class="medium-text oswald">01/01/0001 - type</span>
+                        <h3 class="permanent-marker">Project Title</h3>
+                        <span class="oswald">01/01/0001 - type</span>
                     </div>
                     <div class="project-image-container global-container-decoration">
-                        <img src="" alt="">
+                        <img src="" alt="Project Image">
                     </div>
                 </div>
                 <div class="project-item global-container-decoration">
                     <div class="text-container">
-                        <h1 class="permanent-marker">Project Title</h1>
-                        <span class="medium-text oswald">01/01/0001 - type</span>
+                        <h3 class="permanent-marker">Project Title</h3>
+                        <span class="oswald">01/01/0001 - type</span>
                     </div>
                     <div class="project-image-container global-container-decoration">
-                        <img src="" alt="">
+                        <img src="" alt="Project Image">
                     </div>
                 </div>
                 <div class="project-item global-container-decoration">
                     <div class="text-container">
-                        <h1 class="permanent-marker">Project Title</h1>
-                        <span class="medium-text oswald">01/01/0001 - type</span>
+                        <h3 class="permanent-marker">Project Title</h3>
+                        <span class="oswald">01/01/0001 - type</span>
                     </div>
                     <div class="project-image-container global-container-decoration">
-                        <img src="" alt="">
+                        <img src="" alt="Project Image">
                     </div>
                 </div>
             </div>
-            <h1 class="large-text bangers">Projects</h1>
-            <button class="medium-text">see more</button>
+            <a href="Projects.html" class="global-button-style">see more</a>
         </section>
-        <section id="info-section" class="info">
+        <footer id="info-section" class="info">
             <div class="text-info-container">
                 <div class="text-japanese-info-container">
-                    <span class="medium-text decorating-text">想像できるかい？</span>
-                    <span class="medium-text">プログラムできる</span>
+                    <span class="decorating-text">想像できるかい？</span>
+                    <span>プログラムできる</span>
                 </div>
-                <h1 class="medium-text permanent-marker decorating-text">¿Puedes imaginarlo?</h1>
-                <h1 class="medium-text permanent-marker">Puedes programarlo</h1>       
+                <span class="permanent-marker decorating-text">¿Puedes imaginarlo?</span>
+                <span class="permanent-marker">Puedes programarlo</span>       
             </div>
             <a href="#about-section" class="return-button">
                 <span>Volver</span>
                 <img src="Assets/Svg/Icons/ArrowButtonStyle.svg" alt="Arrow button">
             </a>
-        </section>            
+        </footer>            
     </main>
 </body>
 </html>
