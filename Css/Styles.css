@@ -29,14 +29,14 @@
 body {
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
 
     width: 100vw;
     height: 100vh;
 
     color: var(--clr-primary);
     background-color: var(--clr-secondary);
+
     overflow: hidden;
 }
 

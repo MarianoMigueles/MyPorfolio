@@ -1,4 +1,4 @@
-@import url(Styles.css);
+@import url(../Styles.css);
 
 /*----------------------------------------------------------------------------------------*/
 /*Lateral Bar*/
@@ -6,22 +6,128 @@
 
 .lateral-bar-container {
     position: fixed;
-    display: flex;
-    align-items: center;
-    width: 10px;
+
+    width: fit-content;
+    max-width: var(--max-width-lateral-bar);
     height: 100%;
+    --max-width-lateral-bar: 18em;
+
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+
     background-color: var(--clr-secondary);
     border-right: 2px solid var(--clr-primary);
     box-shadow: 2.5px 0 4px var(--clr-blur);
+
+    padding: 0 1em 0 3em;
+    transition: transform .3s ease;
+
     z-index: 1000;
 }
 
-.main-navigator-buttons-contaier {
-    position: relative;
+.lateral-bar-container > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1.5em;
+}
+
+.lateral-bar-container.closed {
+    transform: translateX(calc(-1 * var(--max-width-lateral-bar) + 1em));
+}
+
+.lateral-bar-container.open {
+    transform: translateX(0);
+}
+
+/* <-- Content lateral bar --> */
+
+.lateral-bar-container > div {
+    span {
+        font-family: var(--fn-permanent-marker);
+    }
+}
+
+.lateral-bar-container > .Professions-animation-container {
+    position: absolute;
+    align-items: end;
+    justify-content: start;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.Professions-animation-container > span {
+    font-size: var(--fn-xlarge);
+    white-space: nowrap;
+    transform-origin: left;
+    transform: translate( -1em,-.5em);
+    rotate: 90deg;
+    max-width: 100%;
+}
+
+
+.lateral-bar-container .location-container {
+    align-items: end;
+    padding-right: 20px;
+}
+
+.lateral-bar-container .name-container {
+    align-items: start;
+
+    h1 {
+        font-family: var(--fn-bangers);
+        font-size: calc(var(--fn-xlarge) + 1rem);
+        display: flex;
+        flex-direction: column;
+    }
+
+    h1 span {
+        font-family: var(--fn-bangers);
+        font-size: var(--fn-large);
+    }
+}
+
+.face-image-container {
+    border: 0 solid var(--clr-primary); 
+    border-right: 3px solid var(--clr-primary); 
+    border-bottom: 3px solid var(--clr-primary);
+    padding: 0 5px 5px 0;
+    box-shadow: 4px 4px 2px var(--clr-blur);
+}
+
+.lateral-bar-container .face-image-container {
+    margin-bottom: 0;
+}
+
+.profession-title-container span {
+    font-size: var(--fn-large);
+}
+
+.profession-title-container span:last-child {
+    text-align: right;
+}
+
+.lateral-bar-container .language-container {
+    flex-direction: row;
+    gap: .5em;
+}
+
+.language-container button {
+    font-size: var(--fn-medium);
+}
+
+/* <-- Buttons nav bar --> */
+
+.main-navigator-buttons-container {
+    position: absolute;
     display: flex;
     flex-direction: column;
     gap: .7em;
-    right: -.4em;
+    right: -2em;
     width: fit-content;
     height: 100%;
     max-height: 42em;
@@ -84,6 +190,34 @@
     height: fit-content;
 }
 
+.lateral-bar-container.open .social-buttons-container {
+    display: none;
+}
+
+.lateral-bar-container.closed .language-container {
+    display: none;
+}
+
+.lateral-bar-container .color-mode-container {
+    position: relative;
+    flex-direction: row;
+    width: fit-content;
+    height: fit-content;
+}
+
+.color-mode-container .mode-selected-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: -60%;
+}
+
+.lateral-bar-container .color-mode-container button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
 /*----------------------------------------------------------------------------------------*/
 /*Main*/
 /*----------------------------------------------------------------------------------------*/
@@ -95,8 +229,7 @@ main {
     height: 100%;
     min-height: 600px;
 
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
 
     display: grid;
     grid-template-columns: repeat(4, 649px);
@@ -120,7 +253,7 @@ main::before {
     transition: width 1s ease;
 
     background-image: linear-gradient(to right, transparent 95%, var(--clr-secondary) 100%), 
-    url("../Assets/Svg/Background/BackgroundBranch.svg");
+    url("../Assets/Svg/Images/BackgroundBranch.svg");
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -129,6 +262,7 @@ main::before {
 }
 
 main > section, main > footer {
+    transform: perspective(0px) translateZ(0px);
     position: relative;
     grid-row: 2 / span 3;
 }
@@ -142,6 +276,10 @@ main h2 {
     text-orientation: upright;
     font-weight: bold;
     white-space: nowrap;
+}
+
+section.on-focus {
+    transform: perspective(1000px) translateZ(30px);
 }
 
 /*----------------------------------------------------------------------------------------*/

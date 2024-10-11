@@ -1,8 +1,4 @@
-@import url(Styles.css);
-
-body {
-    overflow-y: scroll;
-}
+@import url(../Styles.css);
 
 /*----------------------------------------------------------------------------------------*/
 /*Lateral Bar*/
@@ -38,7 +34,7 @@ body {
 
 main {
     width: 100%;
-    padding: 30px;
+    padding: 1em;
 }
 
 main > h1 {
@@ -48,7 +44,7 @@ main > h1 {
 .projects-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 5vw;
+    gap: 3vw;
     padding: 0 50px;
 }
 

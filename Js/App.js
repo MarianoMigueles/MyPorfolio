@@ -2,7 +2,13 @@ import { initNavigator } from './AppNavigation.js';
 
 initNavigator();
 
+////////////////////////////////////////////////////////////////////////////////////
+// Scroll funtion
+////////////////////////////////////////////////////////////////////////////////////
+
 window.addEventListener('wheel', function(e) {
+  checkSections();
+
     if (e.deltaY !== 0) {
       e.preventDefault();
   
@@ -10,38 +16,16 @@ window.addEventListener('wheel', function(e) {
     }
 }, { passive: false });
 
-let initialX  = null;
-
-window.addEventListener('touchstart', function(e) {
-  initialX = e.touches[0].clientX;
-}, { passive: false });
-
-window.addEventListener('touchmove', function(e) {
-  if (initialX === null) return;
-
-  const currentX = e.touches[0].clientX;
-  const deltaX = initialX - currentX; 
-
-  backgroundScroll(deltaX); 
-
-  initialX = currentX;
-}, { passive: false });
-
-window.addEventListener('touchend', function(e) {
-    initialY = null;
-}, { passive: true });
+const main = document.querySelector('main');
 
 function backgroundScroll(deltaY) {
-  const container = document.querySelector('main');
 
-      scrollBackgroundAnimation(deltaY);   
-
-      let currentScroll = container.scrollLeft;
+      let currentScroll = main.scrollLeft;
       let targetScroll = currentScroll + deltaY;
   
       const smoothScroll = () => {
         currentScroll += (targetScroll - currentScroll) * 0.2;
-        container.scrollLeft = currentScroll;
+        main.scrollLeft = currentScroll;
   
         if (Math.abs(targetScroll - currentScroll) > 1) {
           requestAnimationFrame(smoothScroll);
@@ -51,33 +35,50 @@ function backgroundScroll(deltaY) {
       smoothScroll();
 }
 
-const main = document.querySelector('main');
-let backgroundSize = 100;
-let sumValue = 150;
-let subtractionValue = 100;
+const sections = document.querySelectorAll('section');
 
-if(window.innerWidth < 600) {
-    sumValue = 5;
-    subtractionValue = 5;
-}
+function checkSections() {
+  const triggerPoint = window.innerWidth / 2;
 
-function scrollBackgroundAnimation(deltaY) {
-    if(deltaY > 0) {
-      backgroundSize += sumValue;
+  sections.forEach(section => {
+    const sectionRect = section.getBoundingClientRect();
+    const sectionWidth = sectionRect.width;
+    const sectionLeft = sectionRect.left;
+    const sectionRight = sectionRect.right;
+    
+
+    if (sectionLeft + (sectionWidth * 0.25) < triggerPoint && sectionLeft + sectionWidth > 0) {
+      section.classList.add('on-focus');
     } else {
-      backgroundSize -= subtractionValue;
+      section.classList.remove('on-focus');
     }
 
-    console.log(backgroundSize);
-
-    if(backgroundSize > 1990) {
-      backgroundSize = 1990;
-    }
-
-    if(backgroundSize < 100) {
-      backgroundSize = 100;
-    }
-
-    main.style.setProperty('--js-scroll-background-width', backgroundSize + 'px');
+  })
 }
-  
+
+////////////////////////////////////////////////////////////////////////////////////
+// Background animation
+////////////////////////////////////////////////////////////////////////////////////
+
+function scrollBackgroundAnimation(sectionRight) {
+  const newWidth = sectionRight + 'px';
+  console.log(sectionRight)
+  main.style.setProperty('--js-scroll-background-width', newWidth);
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+// Menu button funtion
+////////////////////////////////////////////////////////////////////////////////////
+
+const MENU_BUTTON = document.querySelector('#menu-button');
+const LATERL_BAR_CONTAINER = document.querySelector('.lateral-bar-container');
+
+MENU_BUTTON.addEventListener('click', (e) => {
+  if (LATERL_BAR_CONTAINER.classList.contains('open')) {
+    LATERL_BAR_CONTAINER.classList.remove('open');
+    LATERL_BAR_CONTAINER.classList.add('closed');
+  } else {
+    LATERL_BAR_CONTAINER.classList.remove('closed');
+    LATERL_BAR_CONTAINER.classList.add('open');
+  }
+})
