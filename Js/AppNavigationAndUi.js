@@ -33,17 +33,6 @@ function backgroundScroll(deltaY) {
       smoothScroll();
 }
 
-function querySelectorMany(...selectors) {
-    return selectors.map(selector => document.querySelector(selector));
-}
-
-const [
-    aboutSection,
-     KnowledgeSection,
-      ProjectsSection,
-       InfoSection
-    ] = querySelectorMany('.about', '.knowledge', '.projects', '.info');
-
 const noScrollableButtons = ["menu-button", "color-mode-button", "language-button-spanish", "language-button-english"];
 
 function initSmoothScrollMenu() {
@@ -68,6 +57,12 @@ function initSmoothScrollMenu() {
         });
     });
 }
+
+////////////////////////////////////////////////////////////////////////////////////
+// Lenguage page funtions
+////////////////////////////////////////////////////////////////////////////////////
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Menu button funtion

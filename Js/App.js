@@ -1,5 +1,5 @@
 import { initNavigatorUI} from './AppNavigationAndUi.js';
-import { GetAboutInformation, GetKnowledgeInformation, GetMainProyectsInformation  } from './Contenful.js';
+import { GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation, GetMainProyectsInformation, GetInfoInformation, GetCurriculum } from './Contenful.js';
 
 /* Initilizes page navigation and UI switching functions */
 initNavigatorUI();
@@ -7,15 +7,80 @@ initNavigatorUI();
 ////////////////////////////////////////////////////////////////////////////////////
 // Page content
 ////////////////////////////////////////////////////////////////////////////////////
+
+/* -Initalizing page content- */
+initNavigarionBarContent()
 initAboutSectionContent()
 initKnowledgeSectionContent()
 initProjectsSectionContent()
+initInfoSectionContent()
+initCurriculumLinks()
+/* -------------------------- */
+
+async function initNavigarionBarContent() {
+  const navigationBarData = await GetNavigationBarInformation();
+  
+  const [
+    countryContainer,
+    provinceContainer,
+    cityContainer,
+    professionalTitlePart1,
+    professionalTitlePart2,
+    professionTitlesList,
+    btnAbout,
+    btnKnowledge,
+    btnProjects,
+    btnInfo,
+    btnSpanish,
+    btnEnglish
+  ] = querySelectorMany(
+    '#country',
+    '#province',
+    '#city',
+    '#profession-part1',
+    '#profession-part2',
+    '#profession-titles-list',
+    '#btn-about-section',
+    '#btn-knowledge-section',
+    '#btn-projects-section',
+    '#btn-info-section',
+    '#language-button-spanish',
+    '#language-button-english'
+  );
+  
+  countryContainer.innerHTML = navigationBarData.location.country;
+  provinceContainer.innerHTML = navigationBarData.location.province;
+  cityContainer.innerHTML = navigationBarData.location.city;
+
+  const[part1, part2] = navigationBarData.professionalTitle.split(' ');
+  professionalTitlePart1.innerHTML = part1;
+  professionalTitlePart2.innerHTML = part2;
+
+  professionTitlesList.innerHTML = navigationBarData.professionTitleList.join(' - ');
+
+  const navbuttonsData = [
+    { button: btnAbout, text: navigationBarData.navigationButtonBarList.btnAbout },
+    { button: btnKnowledge, text: navigationBarData.navigationButtonBarList.btnStudies },
+    { button: btnProjects, text: navigationBarData.navigationButtonBarList.btnProjects },
+    { button: btnInfo, text: navigationBarData.navigationButtonBarList.btnInfo },
+  ];
+
+  navbuttonsData.forEach(({ button, text }) => {
+    button.innerHTML = '';
+    const span = document.createElement('span');
+    span.classList.add('button-content');
+    span.innerHTML = text;
+    button.appendChild(span);
+  });
+
+  btnSpanish.innerHTML = navigationBarData.navigationButtonBarList.btnSpanish;
+  btnEnglish.innerHTML = navigationBarData.navigationButtonBarList.btnEnglish;
+}
 
 async function initAboutSectionContent() {
   const aboutData = await GetAboutInformation();
 
-  const aboutParagraph = document.getElementById('about-paragraph');
-  const aboutImage = document.getElementById('about-image');
+  const [aboutParagraph, aboutImage] = querySelectorMany('#about-paragraph', '#about-image');
 
   aboutParagraph.innerHTML = `
     <span>${aboutData.aboutParagraphTitle}</span>
@@ -29,8 +94,7 @@ async function initAboutSectionContent() {
 async function initKnowledgeSectionContent() {
   const knowledgeData = await GetKnowledgeInformation();
 
-  const dedication = document.getElementById('dedication-translated');
-  const KnowledgesSectionTitle = document.getElementById('Knowledges-section-title');
+  const [dedication, KnowledgesSectionTitle] = querySelectorMany('#dedication-translated', '#Knowledges-section-title');
 
   dedication.innerHTML = knowledgeData.studiesSectionDedicationPhrase;
   KnowledgesSectionTitle.innerHTML = knowledgeData.studiesSectionTitle;
@@ -59,9 +123,32 @@ async function initProjectsSectionContent() {
   });
 }
 
+async function initInfoSectionContent() {
+  const infoData = await GetInfoInformation();
+
+  const [phrasePart1, phrasePart2] = querySelectorMany('#phrase-part-1', '#phrase-part-2');
+
+  phrasePart1.innerHTML = infoData.openingPhrase;
+  phrasePart2.innerHTML = infoData.closingPhrase;
+}
+
+async function initCurriculumLinks() {
+  const curriculumData = await GetCurriculum();
+  
+  const cvLinks = document.querySelectorAll('.cv');
+
+  cvLinks.forEach(cv => {
+    cv.href = curriculumData;
+  });
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Page Logic
 ////////////////////////////////////////////////////////////////////////////////////
+
+function querySelectorMany(...selectors) {
+  return selectors.map(selector => document.querySelector(selector));
+}
 
 function skillsOrganizer(skillsList) {
     const skillsContainer = document.getElementById('skill-section');

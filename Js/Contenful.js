@@ -19,11 +19,16 @@ const client = contentful.createClient({
 // Contentful GET methods
 ////////////////////////////////////////////////////////////////////////////////////
 
+const userLanguage = navigator.language || navigator.userLanguage;
+const primaryLenguage = userLanguage.split('-')[0].trim();
+console.log(primaryLenguage);
+
 async function GetContentfulEntry(contentType) {
     try {
 
         const response = await client.getEntries({
-            content_type: `${contentType}`
+            content_type: `${contentType}`,
+            locale: 'es-AR'
         });
 
         return response.items;
@@ -31,6 +36,28 @@ async function GetContentfulEntry(contentType) {
     } catch (err) {
         console.error(err);
     }
+}
+
+export async function GetNavigationBarInformation() {
+    const response = await GetContentfulEntry('navigationBar');
+    
+    return {
+        professionalTitle: response[0].fields.professionTitle,
+        location: {
+            country: response[0].fields.location[0],
+            province: response[0].fields.location[1],
+            city: response[0].fields.location[2]
+        },
+        professionTitleList: response[0].fields.professionTitleList,
+        navigationButtonBarList: {
+            btnAbout: response[0].fields.navigationButtonBarList[0],
+            btnStudies: response[0].fields.navigationButtonBarList[1],
+            btnProjects: response[0].fields.navigationButtonBarList[2],
+            btnInfo: response[0].fields.navigationButtonBarList[3],
+            btnSpanish: response[0].fields.navigationButtonBarList[4],
+            btnEnglish: response[0].fields.navigationButtonBarList[5]
+        }
+    };
 }
 
 export async function GetAboutInformation() {
@@ -79,4 +106,28 @@ export async function GetProyectsInformation() {
 export async function GetMainProyectsInformation() {
     const projects = await GetProyectsInformation();
     return projects.filter(project => project.isMainProject);
+}
+
+export async function GetInfoInformation() {
+    const response = await GetContentfulEntry('info');
+    const [opening, closing] = response[0].fields.phrase.split('-');
+
+    return {
+        openingPhrase: opening.trim(),
+        closingPhrase: closing.trim()
+    }
+}
+
+export async function GetCurriculum() {
+    const response = await GetContentfulEntry('curriculum');
+    return response[0].fields.curriculum.fields.file.url;
+}
+
+////////////////////////////////////////////////////////////////////////////////////
+// Contentful logic
+////////////////////////////////////////////////////////////////////////////////////
+
+function GetUserLanguage() {
+    const userLanguage = navigator.language || navigator.userLanguage;
+    return userLanguage.split('-')[0].trim();
 }

@@ -223,10 +223,10 @@ html.dark .color-mode-container button img {
     justify-content: center;
     align-items: center;
     font-size: var(--fn-small);
-    width: 1.5em;
-    height: 4.5em;
+    width: fit-content;
+    height: fit-content;
     background-color: var(--clr-primary);
-    padding: 0;
+    padding: 5px 2px;
     box-shadow: 2.5px 0 4px var(--clr-blur);
     transition: all .3s ease-in-out;
 }
@@ -246,12 +246,15 @@ html.dark .color-mode-container button img {
 }
 
 .lateral-bar-button-style > span.button-content {
-    position: absolute;
     font-family: var(--fn-bangers);
     text-transform: uppercase;
     color: var(--clr-secondary);
-    transform: rotate(-90deg);
-    transform-origin: center center;
+    transform-origin: center;
+    margin: 5px 0;
+
+    writing-mode: vertical-lr;
+    white-space: nowrap;
+    rotate: 180deg;
 }
 
 .social-buttons-container {
@@ -356,6 +359,7 @@ section.about {
 .about-info p span {
     position: relative;
     transform: rotate(-90deg);
+    top: 10px;
     font-family: var(--fn-bangers);
     font-size: var(--fn-xlarge);
     float: left; 
