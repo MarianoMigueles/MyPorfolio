@@ -35,6 +35,7 @@
 main {
     width: 100%;
     padding: 1em;
+    overflow-y: auto;
 }
 
 main > h1 {
@@ -53,6 +54,10 @@ main > h1 {
     max-width: 229px;
     padding: 0 5px 5px 5px;
     box-shadow: 4px 4px 2px var(--clr-blur);
+}
+
+.project-item img {
+    height: fit-content;
 }
 
 .project-item:hover {

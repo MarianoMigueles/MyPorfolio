@@ -1,84 +1,112 @@
-import { initNavigator } from './AppNavigation.js';
+import { initNavigatorUI} from './AppNavigationAndUi.js';
+import { GetAboutInformation, GetKnowledgeInformation, GetMainProyectsInformation  } from './Contenful.js';
 
-initNavigator();
+/* Initilizes page navigation and UI switching functions */
+initNavigatorUI();
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Scroll funtion
+// Page content
 ////////////////////////////////////////////////////////////////////////////////////
+initAboutSectionContent()
+initKnowledgeSectionContent()
+initProjectsSectionContent()
 
-window.addEventListener('wheel', function(e) {
-  checkSections();
+async function initAboutSectionContent() {
+  const aboutData = await GetAboutInformation();
 
-    if (e.deltaY !== 0) {
-      e.preventDefault();
-  
-      backgroundScroll(e.deltaY)
-    }
-}, { passive: false });
+  const aboutParagraph = document.getElementById('about-paragraph');
+  const aboutImage = document.getElementById('about-image');
 
-const main = document.querySelector('main');
+  aboutParagraph.innerHTML = `
+    <span>${aboutData.aboutParagraphTitle}</span>
+    ${aboutData.aboutParagraph}
+  `;
 
-function backgroundScroll(deltaY) {
-
-      let currentScroll = main.scrollLeft;
-      let targetScroll = currentScroll + deltaY;
-  
-      const smoothScroll = () => {
-        currentScroll += (targetScroll - currentScroll) * 0.2;
-        main.scrollLeft = currentScroll;
-  
-        if (Math.abs(targetScroll - currentScroll) > 1) {
-          requestAnimationFrame(smoothScroll);
-        }
-      };
-  
-      smoothScroll();
+  aboutImage.src = aboutData.aboutImage;
+  aboutImage.alt = aboutData.aboutImageDescription;
 }
 
-const sections = document.querySelectorAll('section');
+async function initKnowledgeSectionContent() {
+  const knowledgeData = await GetKnowledgeInformation();
 
-function checkSections() {
-  const triggerPoint = window.innerWidth / 2;
+  const dedication = document.getElementById('dedication-translated');
+  const KnowledgesSectionTitle = document.getElementById('Knowledges-section-title');
 
-  sections.forEach(section => {
-    const sectionRect = section.getBoundingClientRect();
-    const sectionWidth = sectionRect.width;
-    const sectionLeft = sectionRect.left;
-    const sectionRight = sectionRect.right;
+  dedication.innerHTML = knowledgeData.studiesSectionDedicationPhrase;
+  KnowledgesSectionTitle.innerHTML = knowledgeData.studiesSectionTitle;
+  skillsOrganizer(knowledgeData.studiesSectionSkills);
+}
+
+async function initProjectsSectionContent() {
+  const projectsListData = await GetMainProyectsInformation();
+  
+  const projectsContainer = document.getElementById('projects');
+
+  projectsListData.forEach(project => {
+    const projectItem = `
+      <div class="project-item global-container-decoration">
+        <div class="text-container">
+          <h3 class="permanent-marker">${project.projectTitle}</h3>
+          <span class="oswald">${project.projectDate}</span>
+        </div>
+        <div class="project-image-container global-container-decoration">
+          <img src="${project.projectImage}" alt="${project.projectTitle} project image" />
+        </div>
+      </div>
+    `;
     
+    projectsContainer.innerHTML += projectItem;
+  });
+}
 
-    if (sectionLeft + (sectionWidth * 0.25) < triggerPoint && sectionLeft + sectionWidth > 0) {
-      section.classList.add('on-focus');
-    } else {
-      section.classList.remove('on-focus');
+////////////////////////////////////////////////////////////////////////////////////
+// Page Logic
+////////////////////////////////////////////////////////////////////////////////////
+
+function skillsOrganizer(skillsList) {
+    const skillsContainer = document.getElementById('skill-section');
+    let itemsPerContainer = 4;
+
+    for(let i = 0; i < skillsList.length; i += itemsPerContainer) {
+      const chunk = skillsList.slice(i, i + itemsPerContainer);
+
+      const skillContainer = createSkillContainer();
+
+      chunk.forEach(skill => {
+          const item = `              
+            <li>
+              <img
+                class="icon"
+                src="${skill.skillIcon}"
+                alt="${skill.skillName} logo"
+              />
+            </li>
+          `;
+
+          skillContainer.innerHTML += item;
+      });
+
+      skillsContainer.appendChild(skillContainer);
     }
 
-  })
+    function createSkillContainer() {
+        const skillContainer = document.createElement('ul');
+        skillContainer.classList.add('skill-list-container');
+        skillContainer.classList.add('global-container-decoration');
+        return skillContainer;
+    }
+
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Background animation
 ////////////////////////////////////////////////////////////////////////////////////
 
-function scrollBackgroundAnimation(sectionRight) {
-  const newWidth = sectionRight + 'px';
-  console.log(sectionRight)
-  main.style.setProperty('--js-scroll-background-width', newWidth);
+function scrollBackgroundAnimation(newWidth) {
+  main.style.setProperty('--js-scroll-background-width', newWidth + 'px');
 }
 
-////////////////////////////////////////////////////////////////////////////////////
-// Menu button funtion
-////////////////////////////////////////////////////////////////////////////////////
 
-const MENU_BUTTON = document.querySelector('#menu-button');
-const LATERL_BAR_CONTAINER = document.querySelector('.lateral-bar-container');
 
-MENU_BUTTON.addEventListener('click', (e) => {
-  if (LATERL_BAR_CONTAINER.classList.contains('open')) {
-    LATERL_BAR_CONTAINER.classList.remove('open');
-    LATERL_BAR_CONTAINER.classList.add('closed');
-  } else {
-    LATERL_BAR_CONTAINER.classList.remove('closed');
-    LATERL_BAR_CONTAINER.classList.add('open');
-  }
-})
+
