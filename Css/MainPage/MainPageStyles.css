@@ -292,7 +292,8 @@ main {
     min-height: 600px;
     max-height: 800px;
 
-    overflow: hidden;
+    overflow: scroll;
+    
 
     display: grid;
     grid-template-rows: repeat(5, 1fr);
