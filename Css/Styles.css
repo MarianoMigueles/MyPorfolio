@@ -26,9 +26,23 @@
     touch-action: pan-x;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
 html {
     color: var(--clr-primary);
     background-color: var(--clr-secondary);
+
+    scrollbar-width: 0;
 }
 
 html.dark {

@@ -1,12 +1,9 @@
-import { initNavigatorUI} from './AppNavigationAndUi.js';
+import { querySelectorMany, initSocialIcons } from '../CommonUtilities.js';
 import {
    GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
    GetMainProyectsInformation, GetInfoInformation, GetCurriculum,
-   GetSocialIcons, GetButtonsIcons, GetDecorationIcons, GetSkillsIcons
-   } from './Contenful.js';
-
-/* Initilizes page navigation and UI switching functions */
-initNavigatorUI();
+   GetButtonsIcons, GetDecorationIcons, GetSkillsIcons
+   } from '../ApiData/Contentful.js';
 
 ////////////////////////////////////////////////////////////////////////////////////
 // Page content
@@ -110,34 +107,6 @@ async function initNavigarionBarContent() {
     lateralBarFaceImage.title = imageInfo;
     lateralBarFaceImage.innerHTML = image;
   }
-
-  async function initSocialIcons() {
-    const socialIconsData = await GetSocialIcons();
-
-    const [
-      gitHub, 
-      linkedin, 
-      mail, 
-      cv
-    ] = querySelectorMany('.github', '.linkedin', '.mail', '.cv', true)
-
-    const initSocialButtonIcon = (...btnsGroup) => {
-      btnsGroup.forEach(btns => {
-        btns.forEach(btn => {
-
-          const iconKey = btn.title.toLowerCase();
-  
-          if (socialIconsData[iconKey]) {
-            const iconData = socialIconsData[iconKey]
-            btn.title = iconData.iconTitle;
-            btn.innerHTML = iconData.svg;
-          }
-        });
-      });
-    }
-
-    initSocialButtonIcon(gitHub, linkedin, mail, cv);
-  }
 }
 
 async function initAboutSectionContent() {
@@ -209,15 +178,8 @@ async function initCurriculumLinks() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Page Logic
+// Data Logic functions
 ////////////////////////////////////////////////////////////////////////////////////
-
-function querySelectorMany(...selectors) {
-  const multi = typeof selectors[selectors.length - 1] === 'boolean' ? selectors.pop() : false;
-  return selectors.map(selector => {
-    return multi ? Array.from(document.querySelectorAll(selector)) : document.querySelector(selector);
-  });
-}
 
 function skillsOrganizer(skillsList) {
     const skillsContainer = document.getElementById('skill-section');
@@ -249,16 +211,3 @@ function skillsOrganizer(skillsList) {
     }
 
 }
-
-
-////////////////////////////////////////////////////////////////////////////////////
-// Background animation
-////////////////////////////////////////////////////////////////////////////////////
-
-function scrollBackgroundAnimation(newWidth) {
-  main.style.setProperty('--js-scroll-background-width', newWidth + 'px');
-}
-
-
-
-
