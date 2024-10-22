@@ -1,5 +1,9 @@
 import { initNavigatorUI} from './AppNavigationAndUi.js';
-import { GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation, GetMainProyectsInformation, GetInfoInformation, GetCurriculum } from './Contenful.js';
+import {
+   GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
+   GetMainProyectsInformation, GetInfoInformation, GetCurriculum,
+   GetSocialIcons, GetButtonsIcons, GetDecorationIcons, GetSkillsIcons
+   } from './Contenful.js';
 
 /* Initilizes page navigation and UI switching functions */
 initNavigatorUI();
@@ -19,62 +23,121 @@ initCurriculumLinks()
 
 async function initNavigarionBarContent() {
   const navigationBarData = await GetNavigationBarInformation();
+
+  initLocationInformation()
+  initDectorationImage()
+  initProfessionTitle()
+  initNavBarButtons()
+  initSocialIcons()
+
+  function initLocationInformation() {
+    const [
+      countryContainer,
+      provinceContainer,
+      cityContainer
+    ] = querySelectorMany('#country', '#province','#city',)
+
+
+    countryContainer.innerHTML = navigationBarData.location.country;
+    provinceContainer.innerHTML = navigationBarData.location.province;
+    cityContainer.innerHTML = navigationBarData.location.city;
+  }
   
-  const [
-    countryContainer,
-    provinceContainer,
-    cityContainer,
-    professionalTitlePart1,
-    professionalTitlePart2,
-    professionTitlesList,
-    btnAbout,
-    btnKnowledge,
-    btnProjects,
-    btnInfo,
-    btnSpanish,
-    btnEnglish
-  ] = querySelectorMany(
-    '#country',
-    '#province',
-    '#city',
-    '#profession-part1',
-    '#profession-part2',
-    '#profession-titles-list',
-    '#btn-about-section',
-    '#btn-knowledge-section',
-    '#btn-projects-section',
-    '#btn-info-section',
-    '#language-button-spanish',
-    '#language-button-english'
-  );
+  function initProfessionTitle() {
+    const [
+      professionalTitlePart1,
+       professionalTitlePart2, 
+       professionTitlesList
+      ] = querySelectorMany('#profession-part1', '#profession-part2', '#profession-titles-list') 
+    
+    const title = navigationBarData.professionalTitle;
+    const firstSpace = title.indexOf(' ');
+    
+    const part1 = title.substring(0, firstSpace);
+    const part2 = title.substring(firstSpace + 1);
   
-  countryContainer.innerHTML = navigationBarData.location.country;
-  provinceContainer.innerHTML = navigationBarData.location.province;
-  cityContainer.innerHTML = navigationBarData.location.city;
+    professionalTitlePart1.innerHTML = part1;
+    professionalTitlePart2.innerHTML = part2;
+  
+    professionTitlesList.innerHTML = navigationBarData.professionTitleList.join(' - ');
+  }
 
-  const[part1, part2] = navigationBarData.professionalTitle.split(' ');
-  professionalTitlePart1.innerHTML = part1;
-  professionalTitlePart2.innerHTML = part2;
+  function initNavBarButtons() {
+    const [
+      btnAbout,
+      btnKnowledge,
+      btnProjects,
+      btnInfo,
+      btnSpanish,
+      btnEnglish,
+      btnColorMode
+    ] = querySelectorMany(
+      '#btn-about-section',
+      '#btn-knowledge-section',
+      '#btn-projects-section',
+      '#btn-info-section',
+      '#language-button-spanish',
+      '#language-button-english',
+      '#color-mode-button'
+    );
 
-  professionTitlesList.innerHTML = navigationBarData.professionTitleList.join(' - ');
+    const navbuttonsData = [
+      { button: btnAbout, text: navigationBarData.navigationButtonBarList.btnAbout },
+      { button: btnKnowledge, text: navigationBarData.navigationButtonBarList.btnStudies },
+      { button: btnProjects, text: navigationBarData.navigationButtonBarList.btnProjects },
+      { button: btnInfo, text: navigationBarData.navigationButtonBarList.btnInfo },
+    ];
+  
+    navbuttonsData.forEach(({ button, text }) => {
+      button.innerHTML = '';
+      const span = document.createElement('span');
+      span.classList.add('button-content');
+      span.innerHTML = text;
+      button.appendChild(span);
+    });
+  
+    btnSpanish.innerHTML = navigationBarData.navigationButtonBarList.btnSpanish;
+    btnEnglish.innerHTML = navigationBarData.navigationButtonBarList.btnEnglish;
+  }
 
-  const navbuttonsData = [
-    { button: btnAbout, text: navigationBarData.navigationButtonBarList.btnAbout },
-    { button: btnKnowledge, text: navigationBarData.navigationButtonBarList.btnStudies },
-    { button: btnProjects, text: navigationBarData.navigationButtonBarList.btnProjects },
-    { button: btnInfo, text: navigationBarData.navigationButtonBarList.btnInfo },
-  ];
+  async function initDectorationImage() {
+    const lateralBarFaceImage = document.getElementById('lateral-bar-face-image');
+    const imagesData = await GetDecorationIcons();
 
-  navbuttonsData.forEach(({ button, text }) => {
-    button.innerHTML = '';
-    const span = document.createElement('span');
-    span.classList.add('button-content');
-    span.innerHTML = text;
-    button.appendChild(span);
-  });
+    const image = imagesData.myFace.svg;
+    const imageInfo = imagesData.myFace.iconTitle;
 
-  btnSpanish.innerHTML = navigationBarData.navigationButtonBarList.btnSpanish;
-  btnEnglish.innerHTML = navigationBarData.navigationButtonBarList.btnEnglish;
+    lateralBarFaceImage.title = imageInfo;
+    lateralBarFaceImage.innerHTML = image;
+  }
+
+  async function initSocialIcons() {
+    const socialIconsData = await GetSocialIcons();
+
+    const [
+      gitHub, 
+      linkedin, 
+      mail, 
+      cv
+    ] = querySelectorMany('.github', '.linkedin', '.mail', '.cv', true)
+
+    const initSocialButtonIcon = (...btnsGroup) => {
+      btnsGroup.forEach(btns => {
+        btns.forEach(btn => {
+
+          const iconKey = btn.title.toLowerCase();
+  
+          if (socialIconsData[iconKey]) {
+            const iconData = socialIconsData[iconKey]
+            btn.title = iconData.iconTitle;
+            btn.innerHTML = iconData.svg;
+          }
+        });
+      });
+    }
+
+    initSocialButtonIcon(gitHub, linkedin, mail, cv);
+  }
 }
 
 async function initAboutSectionContent() {
@@ -98,7 +161,10 @@ async function initKnowledgeSectionContent() {
 
   dedication.innerHTML = knowledgeData.studiesSectionDedicationPhrase;
   KnowledgesSectionTitle.innerHTML = knowledgeData.studiesSectionTitle;
-  skillsOrganizer(knowledgeData.studiesSectionSkills);
+
+  const skillsData = await GetSkillsIcons();
+  console.log(skillsData);
+  skillsOrganizer(skillsData);
 }
 
 async function initProjectsSectionContent() {
@@ -110,7 +176,7 @@ async function initProjectsSectionContent() {
     const projectItem = `
       <div class="project-item global-container-decoration">
         <div class="text-container">
-          <h3 class="permanent-marker">${project.projectTitle}</h3>
+          <h3 title="${project.projectTitle}" class="permanent-marker">${project.projectTitle}</h3>
           <span class="oswald">${project.projectDate}</span>
         </div>
         <div class="project-image-container global-container-decoration">
@@ -147,7 +213,10 @@ async function initCurriculumLinks() {
 ////////////////////////////////////////////////////////////////////////////////////
 
 function querySelectorMany(...selectors) {
-  return selectors.map(selector => document.querySelector(selector));
+  const multi = typeof selectors[selectors.length - 1] === 'boolean' ? selectors.pop() : false;
+  return selectors.map(selector => {
+    return multi ? Array.from(document.querySelectorAll(selector)) : document.querySelector(selector);
+  });
 }
 
 function skillsOrganizer(skillsList) {
@@ -156,17 +225,13 @@ function skillsOrganizer(skillsList) {
 
     for(let i = 0; i < skillsList.length; i += itemsPerContainer) {
       const chunk = skillsList.slice(i, i + itemsPerContainer);
-
+      
       const skillContainer = createSkillContainer();
 
       chunk.forEach(skill => {
           const item = `              
-            <li>
-              <img
-                class="icon"
-                src="${skill.skillIcon}"
-                alt="${skill.skillName} logo"
-              />
+            <li title="${skill.skillTitle}" class="skill-item">
+              ${skill.svg}
             </li>
           `;
 

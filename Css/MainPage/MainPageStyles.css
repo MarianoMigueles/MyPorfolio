@@ -41,7 +41,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: .5em;
-    padding: 0 1em 0 3em;
+    padding: 0 1em 0 2.5em;
 }
 
 .lateral-bar-container > .content-bar > div {
@@ -56,6 +56,11 @@ body {
 
 .lateral-bar-container.open {
     transform: translateX(0);
+}
+
+.social-icons-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 /* <-- Content lateral bar --> */
@@ -120,10 +125,6 @@ body {
     box-shadow: 4px 4px 2px var(--clr-blur);
 }
 
-.lateral-bar-container .face-image-container {
-    margin-bottom: 0;
-}
-
 /*profession title style*/
 
 .profession-title-container span {
@@ -147,10 +148,8 @@ body {
 
 /*social buttons style*/
 
-.social-icons-container {
-    display: flex;
+.latelar-bar-buttons-container .social-icons-container {
     flex-direction: row;
-    justify-content: space-between;
 
     width: 100%;
     height: fit-content;
@@ -183,6 +182,9 @@ body {
 .color-mode-container button img {
     transform: rotate(0deg);
     transition: transform .3s ease-in-out;
+    background-color: var(--clr-primary);
+    border-radius: 50%;
+    padding: 1px;
 }
 
 html.dark .color-mode-container button img {
@@ -193,6 +195,7 @@ html.dark .color-mode-container button img {
 
 .language-container {
     display: flex;
+    padding-left: 2em;
     gap: .5em;
 }
 
@@ -260,20 +263,20 @@ html.dark .color-mode-container button img {
 .social-buttons-container {
     position: absolute;
     bottom: .7em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: .5em;
-
+    width: fit-content;
     background-color: var(--clr-secondary);
     border: 1px solid var(--clr-primary);
     padding: 2px;
 }
 
-.social-buttons-container > a {
-    width: fit-content;
-    height: fit-content;
+.social-buttons-container .social-icons-container {
+    flex-direction: column;
+    gap: .5em;
+}
+
+.social-buttons-container a {
+    width: 2em;
+    height: 2em;
 }
 
 .lateral-bar-container.open .social-buttons-container {
@@ -287,7 +290,7 @@ html.dark .color-mode-container button img {
 main {
     position: relative;
 
-    width: 5000px;
+    width: 100%;
     height: 100%;
     min-height: 600px;
     max-height: 800px;
@@ -314,8 +317,7 @@ main::before {
     transform: translateY(-50%);
     transition: width 1s ease;
 
-    background-image: linear-gradient(to right, transparent 95%, var(--clr-secondary) 100%), 
-    url("../../Assets/Svg/Images/BackgroundBranch.svg");
+    background-image: linear-gradient(to right, transparent 95%, var(--clr-secondary) 100%);
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -368,7 +370,7 @@ section.about {
 
 .about-decorating-img {
     position: absolute;
-    bottom: -10%;
+    bottom: 0;
     left: 20%;
     max-width: 13em;
     min-width: 9.5em;
@@ -569,17 +571,21 @@ span.knowledge-dedication {
     width: fit-content;
 }
 
+.skill-list-container li svg {
+    width: 40px;
+    height: 40px;
+}
+
 /*----------------------------------------------------------------------------------------*/
 /*Projects Section*/
 /*----------------------------------------------------------------------------------------*/
 
 section.projects {
     width: fit-content;
-    min-width: 400px;
-    max-width: 400px;
     display: flex;
     justify-content: start;
     align-items: center;
+    flex-direction: row;
     margin-left: 50px;
 }
 
@@ -591,15 +597,14 @@ section.projects > h2 {
 
 section.projects a {
     position: relative;
-    bottom: 0;
-    right: 0;
+    bottom: -40%;
+    right: 5%;
+    white-space: nowrap;
 }
-
 
 /* <-- Projects Section --> */
 
 .project-container {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -626,7 +631,8 @@ section.projects a {
 
 .project-item h3, .project-item span {
     transform-origin: right;
-    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .project-item:nth-child(2) {
@@ -641,6 +647,8 @@ section.projects a {
     display: flex;
     flex-direction: column;
     align-items: end;
+    justify-content: s;
+    width: 100%;
 }
 
 .project-item h3 {
@@ -649,7 +657,8 @@ section.projects a {
 }
 
 .project-image-container {
-    width: 200px;  
+    width: 200px;
+    min-width: 200px; 
     height: 126px;
     border: none;
 }
@@ -659,8 +668,8 @@ section.projects a {
 /*----------------------------------------------------------------------------------------*/
 
 footer.info {
-    min-width: 600px;
-    margin-left: 350px;
+    width: 600px;
+    margin-left: 100px;
 }
 
 footer.info > div {

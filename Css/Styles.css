@@ -29,7 +29,6 @@
 html {
     color: var(--clr-primary);
     background-color: var(--clr-secondary);
-    transition: background-color .3s ease-in-out, color .3s ease-in-out;
 }
 
 html.dark {
@@ -38,6 +37,14 @@ html.dark {
 
     color: var(--clr-primary);
     background-color: var(--clr-secondary);
+}
+
+svg, path, circle {
+    fill: var(--clr-primary);
+}
+
+svg:has(circle) path {
+    fill: var(--clr-secondary);
 }
 
 body {
@@ -64,7 +71,7 @@ ul, li {
     align-items: center;
 }
 
-img {
+img, svg {
     width: 100%;
     height: 100%;
 }

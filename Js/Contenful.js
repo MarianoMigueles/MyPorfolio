@@ -23,13 +23,23 @@ const userLanguage = navigator.language || navigator.userLanguage;
 const primaryLenguage = userLanguage.split('-')[0].trim();
 console.log(primaryLenguage);
 
-async function GetContentfulEntry(contentType) {
+async function GetContentfulEntry(contentType, filters = []) {
     try {
 
-        const response = await client.getEntries({
+        const query = {
             content_type: `${contentType}`,
             locale: 'es-AR'
-        });
+        };
+        
+        if (filters.length > 0) {
+            const [filterType, filterValue] = filters;
+
+            if (filterType && filterValue) {
+                query[`fields.${filterType}`] = filterValue;
+            }
+        }
+
+        const response = await client.getEntries(query);
 
         return response.items;
         
@@ -79,33 +89,21 @@ export async function GetKnowledgeInformation() {
     const knowledgeData = {
         studiesSectionTitle: response[0].fields.studiesTitle,
         studiesSectionDedicationPhrase: response[0].fields.dedicationPhrase,
-        studiesSectionSkills: response[0].fields.skillsSvg.map(skill => {
-            return {
-                skillName: skill.fields.title,
-                skillIcon: skill.fields.file.url
-            }
-        })
     }
 
     return knowledgeData;
 }
 
 export async function GetProyectsInformation() {
-    const response = await GetContentfulEntry('projects');
+    const response = await GetContentfulEntry('prjects');
 
-    return response.map(project => ({
-        projectTitle: project.fields.projectTitle,
-        projectDate: project.fields.creationDate,
-        projectImage: project.fields.projectImage.fields.file.url,
-        projectGitHubUrl: project.fields.gitHubRepository,
-        projectPageUrl: project.fields.projectPageUrl,
-        isMainProject: project.fields.isMain
-    }));
+    return response.map(project => { return MapProjectToObject(project) });
 }
 
 export async function GetMainProyectsInformation() {
-    const projects = await GetProyectsInformation();
-    return projects.filter(project => project.isMainProject);
+    const response = await GetContentfulEntry('projects', GetEntryFilter('project'));
+
+    return response.map(project => { return MapProjectToObject(project) });
 }
 
 export async function GetInfoInformation() {
@@ -123,11 +121,64 @@ export async function GetCurriculum() {
     return response[0].fields.curriculum.fields.file.url;
 }
 
+// <-- Svg Get Methods -->
+
+export async function  GetSocialIcons() {
+    const response = await GetContentfulEntry('svgList', GetEntryFilter('social'));
+    return response[0].fields.svg.socialIconsSvg;
+}
+
+export async function  GetButtonsIcons() {
+    const response = await GetContentfulEntry('svgList', GetEntryFilter('button'));
+    return response[0].fields.svg.buttonsSvg;
+}
+
+export async function  GetDecorationIcons() {
+    const response = await GetContentfulEntry('svgList', GetEntryFilter('decoration'));
+    return response[0].fields.svg.decorationImageSvg;
+}
+
+export async function GetSkillsIcons() {
+    const response = await GetContentfulEntry('svgList', GetEntryFilter('skill'));
+    return response[0].fields.svg.skillsSvg;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Contentful logic
 ////////////////////////////////////////////////////////////////////////////////////
 
+function GetEntryFilter(filter) {
+
+    let filterLowerCase = filter.toLowerCase();
+
+    switch(filterLowerCase) {
+        case 'decoration': 
+            return ['svgListTitle', 'pageDecorationSvg'];
+        case 'button':
+            return ['svgListTitle', 'decorationButtonsSvg'];
+        case 'social':
+            return ['svgListTitle', 'socialIconsSvg'];
+        case 'skill':
+            return ['svgListTitle', 'skillsSvg'];
+        case 'project':
+            return ['isMain', true];
+        default:
+            return [];
+    }
+}
+
 function GetUserLanguage() {
     const userLanguage = navigator.language || navigator.userLanguage;
     return userLanguage.split('-')[0].trim();
+}
+
+function MapProjectToObject(project) {
+    return {
+        projectTitle: project.fields.projectTitle,
+        projectDate: project.fields.creationDate,
+        projectImage: project.fields.projectImage.fields.file.url,
+        projectGitHubUrl: project.fields.gitHubRepository,
+        projectPageUrl: project.fields.projectPageUrl,
+        isMainProject: project.fields.isMain
+    };
 }

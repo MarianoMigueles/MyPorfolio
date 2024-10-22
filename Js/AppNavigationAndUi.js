@@ -91,13 +91,29 @@ const colorModeSelected = document.querySelector('span.type');
 const colorModeButton = document.getElementById('color-mode-button');
 
 function changePageColorMode() {
-  if(document.documentElement.classList.contains('dark')) {
-    document.documentElement.classList.remove('dark');
-    colorModeSelected.innerText = 'Light';
-  } else {
-    document.documentElement.classList.add('dark');
-    colorModeSelected.innerText = 'Dark';
-  }
+  let newColorMode = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+  applyPageTheme(newColorMode);
+  localStorage.setItem('theme', newColorMode);
 }
 
 colorModeButton.addEventListener('click', changePageColorMode);
+
+let savedTheme = localStorage.getItem('theme');
+
+if (savedTheme) {
+  applyPageTheme(savedTheme);
+} else {
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  isDarkMode ? applyPageTheme('dark') : applyPageTheme('light');
+}
+
+export function applyPageTheme(theme) {
+  if(theme === 'dark') {
+    document.documentElement.classList.add('dark');
+    colorModeSelected.innerText = 'Dark';
+  } else {
+    document.documentElement.classList.remove('dark');
+    colorModeSelected.innerText = 'Light';
+  }
+}
+
