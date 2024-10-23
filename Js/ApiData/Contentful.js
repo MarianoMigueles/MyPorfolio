@@ -94,7 +94,7 @@ export async function GetKnowledgeInformation() {
 }
 
 export async function GetProyectsInformation() {
-    const response = await GetContentfulEntry('prjects');
+    const response = await GetContentfulEntry('projects');
 
     return response.map(project => { return MapProjectToObject(project) });
 }
@@ -177,7 +177,7 @@ function MapProjectToObject(project) {
         projectDate: project.fields.creationDate,
         projectImage: project.fields.projectImage.fields.file.url,
         projectGitHubUrl: project.fields.gitHubRepository,
-        projectPageUrl: project.fields.projectPageUrl,
+        projectPageUrl: "projectPageUrl" in project.fields ? project.fields.projectPageUrl : '',
         isMainProject: project.fields.isMain
     };
 }

@@ -12,20 +12,30 @@
     width: fit-content;
     height: 100%;
     gap: 50px;
-    margin-left: 5px;
 }
 
 .social-button-container ul {
     gap: 2em;
 }
 
-.social-item {
-    width: 34px;
-    height: 34px;
+.social-item a {
+    width: 2.5em;
+    height: 2.5em;
 }
 
 .return-button {
-    max-width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    border-top: 0;
+    border-left: 0;
+}
+
+.return-button span {
+    transform-origin: center;
+    transform: rotate(-40deg);
 }
 
 /*----------------------------------------------------------------------------------------*/
@@ -57,7 +67,7 @@ main > h1 {
 }
 
 .project-item img {
-    height: fit-content;
+    max-height: 100px;
 }
 
 .project-item:hover {
@@ -66,7 +76,7 @@ main > h1 {
 
 .bottom-container {
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;  
 }
 
 .bottom-container span {
@@ -76,6 +86,8 @@ main > h1 {
 
 .bottom-container .project-play-button {
     display: flex;
+    gap: .2em;
+    padding: 2px;
 }
 
 

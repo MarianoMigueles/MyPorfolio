@@ -47,7 +47,7 @@ function applyPageTheme(theme) {
 // social links page funtions
 ////////////////////////////////////////////////////////////////////////////////////
 
-export async function initSocialIcons() {
+export async function initSocialIcons(areMany = false) {
   const socialIconsData = await GetSocialIcons();
 
   const [
@@ -55,21 +55,28 @@ export async function initSocialIcons() {
     linkedin, 
     mail, 
     cv
-  ] = querySelectorMany('.github', '.linkedin', '.mail', '.cv', true)
+  ] = querySelectorMany(...['.github', '.linkedin', '.mail', '.cv', areMany && true])
 
   const initSocialButtonIcon = (...btnsGroup) => {
     btnsGroup.forEach(btns => {
-      btns.forEach(btn => {
-
-        const iconKey = btn.title.toLowerCase();
-
-        if (socialIconsData[iconKey]) {
-          const iconData = socialIconsData[iconKey]
-          btn.title = iconData.iconTitle;
-          btn.innerHTML = iconData.svg;
-        }
-      });
+      if(areMany) {
+        btns.forEach(btn => {
+          generateButton(btn)
+        });
+      } else {
+        generateButton(btns)
+      }  
     });
+  }
+
+  const generateButton = (btn) => {
+    const iconKey = btn.title.toLowerCase();
+
+    if (socialIconsData[iconKey]) {
+      const iconData = socialIconsData[iconKey]
+      btn.title = iconData.iconTitle;
+      btn.innerHTML = iconData.svg;
+    }
   }
 
   initSocialButtonIcon(gitHub, linkedin, mail, cv);

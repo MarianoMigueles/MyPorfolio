@@ -1,8 +1,8 @@
 import { querySelectorMany, initSocialIcons } from '../CommonUtilities.js';
 import {
    GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
-   GetMainProyectsInformation, GetInfoInformation, GetCurriculum,
-   GetButtonsIcons, GetDecorationIcons, GetSkillsIcons
+   GetMainProyectsInformation, GetInfoInformation, GetCurriculum, 
+   GetDecorationIcons, GetSkillsIcons
    } from '../ApiData/Contentful.js';
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +25,7 @@ async function initNavigarionBarContent() {
   initDectorationImage()
   initProfessionTitle()
   initNavBarButtons()
-  initSocialIcons()
+  initSocialIcons(true)
 
   function initLocationInformation() {
     const [
@@ -66,16 +66,14 @@ async function initNavigarionBarContent() {
       btnProjects,
       btnInfo,
       btnSpanish,
-      btnEnglish,
-      btnColorMode
+      btnEnglish
     ] = querySelectorMany(
       '#btn-about-section',
       '#btn-knowledge-section',
       '#btn-projects-section',
       '#btn-info-section',
       '#language-button-spanish',
-      '#language-button-english',
-      '#color-mode-button'
+      '#language-button-english'
     );
 
     const navbuttonsData = [

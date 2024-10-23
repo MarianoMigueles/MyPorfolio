@@ -173,6 +173,10 @@ body {
     left: -60%;
 }
 
+.mode-selected-container span:first-child {
+    text-align: end;
+}
+
 .color-mode-container button {
     border: none;
     background-color: transparent;
@@ -724,6 +728,8 @@ footer.info .return-button {
     height: 100px;
     bottom: -35%;
     right: 0;
+    border-right: 0;
+    border-bottom: 0;
 }
 
 footer.info .return-button span {

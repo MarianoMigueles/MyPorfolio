@@ -107,7 +107,7 @@ span {
     background-color: var(--clr-secondary);
 }
 
-button:hover, .global-container-decoration:hover {
+button:hover, .global-container-decoration:hover, .link:hover {
     transform: scale(1.03);
     transition: all .3s ease-in-out;
 }
@@ -141,7 +141,6 @@ a {
 
 .return-button {
     width: 120px;
-    border: none;
 }
 
 .return-button span {

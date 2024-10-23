@@ -25,8 +25,10 @@ function initColorModeButton() {
     const colorModeSelected = document.querySelector('span.type');
     const colorModeButton = document.getElementById('color-mode-button');
     
-    colorModeButton.addEventListener('click', changePageColorMode);
-
+    colorModeButton.addEventListener('click', ()=> {
+      changePageColorMode();
+      colorModeSelected.innerText = colorModeSelected.innerText === 'Dark'? 'Light' : 'Dark';
+    });
     colorModeSelected.innerText = colorModeSelected.innerText === 'Dark'? 'Light' : 'Dark';
 }
 
