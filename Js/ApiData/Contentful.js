@@ -18,16 +18,14 @@ const client = contentful.createClient({
 // Contentful GET methods
 ////////////////////////////////////////////////////////////////////////////////////
 
-const userLanguage = navigator.language || navigator.userLanguage;
-const primaryLenguage = userLanguage.split('-')[0].trim();
-console.log(primaryLenguage);
+let lenguageData = GetUserLanguage();
 
 async function GetContentfulEntry(contentType, filters = []) {
     try {
 
         const query = {
             content_type: `${contentType}`,
-            locale: 'es-AR'
+            locale: lenguageData
         };
         
         if (filters.length > 0) {
@@ -142,6 +140,11 @@ export async function GetSkillsIcons() {
     return response[0].fields.svg.skillsSvg;
 }
 
+export async function GetStudiesIcons() {
+    const response = await GetContentfulEntry('svgList', GetEntryFilter('studies'));
+    return response[0].fields.svg.studiesSvg
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Contentful logic
 ////////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +162,8 @@ function GetEntryFilter(filter) {
             return ['svgListTitle', 'socialIconsSvg'];
         case 'skill':
             return ['svgListTitle', 'skillsSvg'];
+        case 'studies':
+            return ['svgListTitle', 'studiesSvg']
         case 'project':
             return ['isMain', true];
         default:
@@ -167,8 +172,20 @@ function GetEntryFilter(filter) {
 }
 
 function GetUserLanguage() {
-    const userLanguage = navigator.language || navigator.userLanguage;
-    return userLanguage.split('-')[0].trim();
+
+    let userLanguage;
+    let language;
+
+    if (localStorage.getItem("language")) {
+        language = localStorage.getItem("language");
+    } else {
+        language = navigator.language || navigator.userLanguage;
+    }
+
+    userLanguage = language.split('-')[0].trim();
+    localStorage.setItem("language", userLanguage);
+
+    return userLanguage === 'es' ? 'es-AR' : 'en-GB';
 }
 
 function MapProjectToObject(project) {

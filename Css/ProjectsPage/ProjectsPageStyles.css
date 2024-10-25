@@ -1,5 +1,3 @@
-@import url(../Styles.css);
-
 /*----------------------------------------------------------------------------------------*/
 /*Lateral Bar*/
 /*----------------------------------------------------------------------------------------*/
@@ -48,7 +46,11 @@ main {
     overflow-y: auto;
 }
 
-main > h1 {
+h1, h1 > span {
+    font-size: var(--fn-xlarge);
+}
+
+h1 { 
     margin: 0 0 30px 50px;
 }
 
@@ -56,18 +58,24 @@ main > h1 {
     display: flex;
     flex-wrap: wrap;
     gap: 3vw;
-    padding: 0 50px;
+    padding: 0 2vw;
 }
 
 .project-item {
-    min-width: 150px;
-    max-width: 229px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 18em;
+    min-width: 13em;
     padding: 0 5px 5px 5px;
     box-shadow: 4px 4px 2px var(--clr-blur);
 }
 
-.project-item img {
-    max-height: 100px;
+.project-item h2, .bottom-container span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--fn-inknut-antiqua);
+    white-space: nowrap;
 }
 
 .project-item:hover {
@@ -76,7 +84,9 @@ main > h1 {
 
 .bottom-container {
     display: flex;
-    justify-content: space-between;  
+    justify-content: space-between;
+    max-height: 2.5em;
+    margin-top: 5px;  
 }
 
 .bottom-container span {

@@ -42,6 +42,18 @@ function applyPageTheme(theme) {
 // Lenguage page funtions
 ////////////////////////////////////////////////////////////////////////////////////
 
+export function changePageLenguage(lenguague) {
+  if(localStorage.getItem('language') === lenguague) {
+    return;
+  }
+  localStorage.setItem('language', lenguague);
+  location.reload();
+}
+
+export function initReturnButtons() {
+  const returnButton = document.querySelector('.return-button>span');
+  returnButton.innerHTML = localStorage.getItem('language') === 'es' ? 'Volver' : 'Return';
+}
 
 ////////////////////////////////////////////////////////////////////////////////////
 // social links page funtions

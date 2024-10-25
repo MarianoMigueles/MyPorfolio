@@ -1,8 +1,8 @@
-import { querySelectorMany, initSocialIcons } from '../CommonUtilities.js';
+import { querySelectorMany, initSocialIcons, initReturnButtons } from '../CommonUtilities.js';
 import {
    GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
    GetMainProyectsInformation, GetInfoInformation, GetCurriculum, 
-   GetDecorationIcons, GetSkillsIcons
+   GetDecorationIcons, GetSkillsIcons, GetStudiesIcons
    } from '../ApiData/Contentful.js';
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -10,12 +10,16 @@ import {
 ////////////////////////////////////////////////////////////////////////////////////
 
 /* -Initalizing page content- */
-initNavigarionBarContent()
-initAboutSectionContent()
-initKnowledgeSectionContent()
-initProjectsSectionContent()
-initInfoSectionContent()
-initCurriculumLinks()
+document.addEventListener('DOMContentLoaded', initHomePageData)
+
+function initHomePageData() {
+  initNavigarionBarContent()
+  initAboutSectionContent()
+  initKnowledgeSectionContent()
+  initProjectsSectionContent()
+  initInfoSectionContent()
+  initCurriculumLinks()
+}
 /* -------------------------- */
 
 async function initNavigarionBarContent() {
@@ -110,6 +114,8 @@ async function initNavigarionBarContent() {
 async function initAboutSectionContent() {
   const aboutData = await GetAboutInformation();
 
+  console.log(aboutData);
+
   const [aboutParagraph, aboutImage] = querySelectorMany('#about-paragraph', '#about-image');
 
   aboutParagraph.innerHTML = `
@@ -123,25 +129,38 @@ async function initAboutSectionContent() {
 
 async function initKnowledgeSectionContent() {
   const knowledgeData = await GetKnowledgeInformation();
+  const studiesData = await GetStudiesIcons()
 
-  const [dedication, KnowledgesSectionTitle] = querySelectorMany('#dedication-translated', '#Knowledges-section-title');
+  const [
+    technicalDegree,
+    englishAcademy,
+    dedication,
+     KnowledgesSectionTitle
+    ] = querySelectorMany( '#istea', '#english', '#dedication-translated', '#Knowledges-section-title');
+
+  technicalDegree.title = studiesData.ISTEA.iconTitle;
+  technicalDegree.innerHTML = studiesData.ISTEA.svg;
+
+  englishAcademy.title = studiesData.culturalInglesa.iconTitle;
+  englishAcademy.innerHTML = studiesData.culturalInglesa.svg;
+
 
   dedication.innerHTML = knowledgeData.studiesSectionDedicationPhrase;
   KnowledgesSectionTitle.innerHTML = knowledgeData.studiesSectionTitle;
 
   const skillsData = await GetSkillsIcons();
-  console.log(skillsData);
   skillsOrganizer(skillsData);
 }
 
 async function initProjectsSectionContent() {
   const projectsListData = await GetMainProyectsInformation();
-  
   const projectsContainer = document.getElementById('projects');
 
   projectsListData.forEach(project => {
-    const projectItem = `
-      <div class="project-item global-container-decoration">
+    const URL = project.projectPageUrl !== "" ? project.projectPageUrl : project.projectGitHubUrl;
+    const projectItem = createProjectItem(URL);
+    
+    projectItem.innerHTML = `
         <div class="text-container">
           <h3 title="${project.projectTitle}" class="permanent-marker">${project.projectTitle}</h3>
           <span class="oswald">${project.projectDate}</span>
@@ -149,11 +168,20 @@ async function initProjectsSectionContent() {
         <div class="project-image-container global-container-decoration">
           <img src="${project.projectImage}" alt="${project.projectTitle} project image" />
         </div>
-      </div>
     `;
     
-    projectsContainer.innerHTML += projectItem;
+    projectsContainer.appendChild(projectItem);
   });
+
+  const seeMoreButton = document.getElementById('see-more-projects');
+  seeMoreButton.innerHTML = localStorage.getItem('language') === 'es' ? 'ver más' : 'see more';
+
+  function createProjectItem(url) {
+    const item = document.createElement('div');
+    item.classList.add('project-item', 'global-container-decoration');
+    item.addEventListener('click', ()=> { window.location.href = url} );
+    return item;
+  }
 }
 
 async function initInfoSectionContent() {
@@ -163,6 +191,8 @@ async function initInfoSectionContent() {
 
   phrasePart1.innerHTML = infoData.openingPhrase;
   phrasePart2.innerHTML = infoData.closingPhrase;
+
+  initReturnButtons()
 }
 
 async function initCurriculumLinks() {

@@ -1,12 +1,13 @@
-import { changePageColorMode, initPageTheme } from '../CommonUtilities.js';
+import { changePageColorMode, initPageTheme, changePageLenguage } from '../CommonUtilities.js';
 
-initHomePageLogic()
+document.addEventListener('DOMContentLoaded', initHomePageLogic)
 
 function initHomePageLogic() {
     initPageTheme()
     initHorizontalyNavigationPage()
     initColorModeButton()
     initMenuButton()
+    initLanguageButtons()
 }
 
 function initHorizontalyNavigationPage() {
@@ -100,10 +101,23 @@ function toggleMenu() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
+// Laguage button funtion
+////////////////////////////////////////////////////////////////////////////////////
+
+function initLanguageButtons() {
+  const languageButtons = document.querySelectorAll('button[data-language]');
+
+  languageButtons.forEach(btn => {
+    btn.addEventListener('click', e => {
+      changePageLenguage(e.target.getAttribute('data-language'));p
+    });
+  });
+}
+
+////////////////////////////////////////////////////////////////////////////////////
 // Background animation
 ////////////////////////////////////////////////////////////////////////////////////
 
 function scrollBackgroundAnimation(newWidth) {
     main.style.setProperty('--js-scroll-background-width', newWidth + 'px');
-  }
-  
+}

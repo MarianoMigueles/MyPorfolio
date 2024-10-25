@@ -1,5 +1,3 @@
-@import url(../Styles.css);
-
 body {
     justify-content: center;
     align-items: center;
@@ -221,6 +219,7 @@ html.dark .color-mode-container button img {
     right: -2em;
     width: fit-content;
     height: 100vh;
+    max-height: 800px;
     padding: .7em 0;
 }
 
@@ -238,7 +237,6 @@ html.dark .color-mode-container button img {
     transition: all .3s ease-in-out;
 }
 
-.lateral-bar-button-style.active,
  .lateral-bar-button-style:hover {
     width: 2.5em;
 }
@@ -249,7 +247,26 @@ html.dark .color-mode-container button img {
 }
 
 .lateral-bar-button-style.menu-button > span {
+    position: absolute;
     color: var(--clr-secondary);
+}
+
+.lateral-bar-container.closed {
+    .menu {
+        opacity: 1;
+    }
+    .close {
+        opacity: 0;
+    }
+}
+
+.lateral-bar-container.open {
+    .menu {
+        opacity: 0;
+    }
+    .close {
+        opacity: 1;
+    }
 }
 
 .lateral-bar-button-style > span.button-content {
@@ -387,6 +404,7 @@ section.about {
     bottom: -8em;
     width: 250px;
     height: 300px;
+    
     padding: 10px 15px;
     
     display: flex;
@@ -492,32 +510,28 @@ span.knowledge-dedication {
     opacity: 0;
     top: 30%;
     left: 5px;
-} 
+}
 
 .study-item {
     position: relative;
-    width: fit-content;
-    height: fit-content;
-    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1em;
 }
 
-.study-item-container div:first-child {
+.study-item-container .study-item:first-child {
     top: -1em;
     left: -55%;
-
-    img {
-        width: 200px;
-    }
+    width: 15em;
+    height: 8em;
 }
 
-.study-item-container div:last-child {
+.study-item-container .study-item:last-child {
     position: absolute;
     bottom: 20%;
     left: 25%;
-
-    img {
-        max-width: 160px;
-    }
 }
 
 .study-item-container div:last-child::before {
