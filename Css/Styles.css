@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Oswald:wght@200..700&family=Permanent+Marker&display=swap" rel="stylesheet');
+
+:root {
+    /*Colors*/
+    --clr-primary: #0D0D0D;
+    --clr-secondary: #F7EFEB;
+    --clr-blur: #0D0D0D25;
+
+    /*Fonts Family*/
+    --fn-permanent-marker: 'Permanent Marker', cursive;
+    --fn-bangers: 'Bangers', cursive;
+    --fn-oswald: 'Oswald', sans-serif;
+    --fn-inknut-antiqua: 'Inknut Antiqua', serif;
+
+    /*Fonts Size*/
+    --fn-small: clamp(0.875rem, 2vw, 1rem);  /* De 14px a 16px */
+    --fn-medium: clamp(1rem, 3vw, 1.25rem);  /* De 16px a 20px */
+    --fn-large: clamp(2rem, 4vw, 2rem);   /* De 20px a 32px */
+    --fn-xlarge: clamp(3rem, 6vw, 3rem);     /* De 32px a 48px */
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    touch-action: pan-x;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+html {
+    color: var(--clr-primary);
+    background-color: var(--clr-secondary);
+
+    scrollbar-width: 0;
+}
+
+html.dark {
+    --clr-primary: #F7EFEB;
+    --clr-secondary: #0D0D0D;
+
+    color: var(--clr-primary);
+    background-color: var(--clr-secondary);
+}
+
+svg, path, circle {
+    fill: var(--clr-primary);
+}
+
+svg:has(circle) path {
+    fill: var(--clr-secondary);
+}
+
+body {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+header {
+    height: 100%;
+}
+
+ul, li {
+    list-style: none;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img, svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+span {
+    font-size: var(--fn-medium);
+}
+
+.social-icon {
+    width: var(--fn-large);
+}
+
+.icon {
+    width: var(--fn-xlarge);
+}
+
+/*-------Containers Styles--------*/
+
+.global-container-decoration {
+    border: 2px solid var(--clr-primary);
+    background-color: var(--clr-secondary);
+}
+
+button:hover, .global-container-decoration:hover, .link:hover {
+    transform: scale(1.03);
+    transition: all .3s ease-in-out;
+}
+
+/*---------Button Styles----------*/
+
+button, .global-button-style {
+    width: fit-content;
+    height: fit-content;
+
+    border: none;
+    padding: 0 20px;
+    outline: none;
+
+    font-family: var(--fn-permanent-marker);
+    font-size: var(--fn-medium);
+    text-transform: uppercase;
+    color: inherit;
+    border: 2px solid var(--clr-primary);
+    background-color: var(--clr-secondary);
+    cursor: pointer;
+}
+
+a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.return-button {
+    width: 120px;
+}
+
+.return-button span {
+    position: absolute;
+    font-family: var(--fn-permanent-marker);
+}
+
+/*---------Fonts Styles----------*/
+
+.oswald {
+    font-family: var(--fn-oswald);
+}
+
+.bangers {
+    font-family: var(--fn-bangers);
+}
+
+.permanent-marker {
+    font-family: var(--fn-permanent-marker);
+}
