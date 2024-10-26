@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="Css/Styles.css"/>
-    <link rel="stylesheet" href="Css/MainPage/MainPageStyles.css"/>
+    <link rel="stylesheet preload" href="Css/Styles.css"/>
+    <link rel="preload" href="Css/MainPage/MainPageStyles.css" as="style" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="Css/pagina-especifica.css"></noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
     <script defer src="https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js"></script>
     <script defer type="module" src="Js/Home/HomePageData.js"></script>
