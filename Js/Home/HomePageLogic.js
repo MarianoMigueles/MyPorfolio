@@ -1,4 +1,4 @@
-import { changePageColorMode, initPageTheme, changePageLenguage } from '../CommonUtilities.js';
+import { changePageColorMode, initPageTheme, changePageLenguage, translatedText } from '../CommonUtilities.js';
 
 document.addEventListener('DOMContentLoaded', initHomePageLogic)
 
@@ -23,14 +23,23 @@ function initHorizontalyNavigationPage() {
 }
 
 function initColorModeButton() {
-    const colorModeSelected = document.querySelector('span.type');
     const colorModeButton = document.getElementById('color-mode-button');
-    
+
     colorModeButton.addEventListener('click', ()=> {
       changePageColorMode();
-      colorModeSelected.innerText = colorModeSelected.innerText === 'Dark'? 'Light' : 'Dark';
-    });
-    colorModeSelected.innerText = colorModeSelected.innerText === 'Dark'? 'Light' : 'Dark';
+      changeColorModeSelectedText();
+    })
+    changeColorModeSelectedText()
+
+    function changeColorModeSelectedText() {
+      if (document.documentElement.classList.contains('dark')) {
+        translatedText('.mode-selected-container>.line1', 'Modo', 'Light' );
+        translatedText('.mode-selected-container>.line2', 'Claro', 'Mode');
+      } else {
+        translatedText('.mode-selected-container>.line1', 'Modo', 'Dark' );
+        translatedText('.mode-selected-container>.line2', 'Oscuro', 'Mode');
+      }
+    }
 }
 
 function initMenuButton() {

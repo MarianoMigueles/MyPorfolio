@@ -1,4 +1,4 @@
-import { querySelectorMany, initSocialIcons, initReturnButtons } from '../CommonUtilities.js';
+import { querySelectorMany, initSocialIcons, initReturnButtons, translatedText } from '../CommonUtilities.js';
 import {
    GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
    GetMainProyectsInformation, GetInfoInformation, GetCurriculum, 
@@ -114,8 +114,6 @@ async function initNavigarionBarContent() {
 async function initAboutSectionContent() {
   const aboutData = await GetAboutInformation();
 
-  console.log(aboutData);
-
   const [aboutParagraph, aboutImage] = querySelectorMany('#about-paragraph', '#about-image');
 
   aboutParagraph.innerHTML = `
@@ -144,6 +142,8 @@ async function initKnowledgeSectionContent() {
   englishAcademy.title = studiesData.culturalInglesa.iconTitle;
   englishAcademy.innerHTML = studiesData.culturalInglesa.svg;
 
+  englishAcademy.style.setProperty('--txt-name', `"${translatedText(null, 'Ingles', 'English')}"`);
+  
 
   dedication.innerHTML = knowledgeData.studiesSectionDedicationPhrase;
   KnowledgesSectionTitle.innerHTML = knowledgeData.studiesSectionTitle;
@@ -173,8 +173,7 @@ async function initProjectsSectionContent() {
     projectsContainer.appendChild(projectItem);
   });
 
-  const seeMoreButton = document.getElementById('see-more-projects');
-  seeMoreButton.innerHTML = localStorage.getItem('language') === 'es' ? 'ver más' : 'see more';
+  translatedText('#see-more-projects', 'ver más', 'see more');
 
   function createProjectItem(url) {
     const item = document.createElement('div');

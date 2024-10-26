@@ -159,20 +159,17 @@ body {
 
 .color-mode-container {
     position: relative;
-    flex-direction: row;
-    width: fit-content;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
     height: fit-content;
 }
 
 .mode-selected-container {
-    position: absolute;
     display: flex;
     flex-direction: column;
     left: -60%;
-}
-
-.mode-selected-container span:first-child {
-    text-align: end;
 }
 
 .color-mode-container button {
@@ -218,7 +215,7 @@ html.dark .color-mode-container button img {
     gap: .7em;
     right: -2em;
     width: fit-content;
-    height: 100vh;
+    height: 100dvh;
     max-height: 800px;
     padding: .7em 0;
 }
@@ -532,6 +529,7 @@ span.knowledge-dedication {
     position: absolute;
     bottom: 20%;
     left: 25%;
+    --txt-name: "English";
 }
 
 .study-item-container div:last-child::before {
@@ -545,7 +543,7 @@ span.knowledge-dedication {
 }
 
 .study-item-container div:last-child::after {
-    content: "English";
+    content: var(--txt-name);
     position: absolute;
     bottom: 30px;
     right: -50px;

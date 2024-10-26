@@ -1,4 +1,4 @@
-import { initSocialIcons, initReturnButtons } from '../CommonUtilities.js'
+import { initSocialIcons, initReturnButtons, translatedText } from '../CommonUtilities.js'
 import { GetButtonsIcons, GetProyectsInformation } from '../ApiData/Contentful.js'
 
 document.addEventListener('DOMContentLoaded', initProjectPageData)
@@ -13,8 +13,8 @@ async function initProjectData() {
     const projectData = await GetProyectsInformation();
     const btnData = await GetButtonsIcons();
     const projectContainer = document.getElementById('projects');
-    const projectSectionTitle = document.querySelector('h1>span');
-    projectSectionTitle.innerHTML = localStorage.getItem('language') === 'es' ? 'Proyectos' : 'Projects';
+    
+    translatedText('h1>span', 'Proyectos', 'Projects');
 
     projectData.forEach(prj => { createProject(prj) });
      

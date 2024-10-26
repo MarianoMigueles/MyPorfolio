@@ -9,6 +9,17 @@ export function querySelectorMany(...selectors) {
   });
 }
 
+export function translatedText(elementToTranslate = null, textSpanish, textEnglish) {
+  const txt = localStorage.getItem('language') === 'es' ? textSpanish : textEnglish;
+
+  if(elementToTranslate === null) {
+    return txt;
+  }
+
+  const element = document.querySelector(elementToTranslate);
+  element.innerHTML = txt;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 // Page theme funtions
 ////////////////////////////////////////////////////////////////////////////////////
