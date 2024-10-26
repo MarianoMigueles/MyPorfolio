@@ -80,7 +80,7 @@ function smoothScrollMenu() {
 
       const targetId = btn.getAttribute('data-section'); 
       const targetElement = document.querySelector(`#${targetId}`); 
-      const targetPosition = targetElement.getBoundingClientRect().left - 100;
+      const targetPosition = targetElement.getBoundingClientRect().left - 10;
 
       btn.addEventListener('click', (e)=> {
           e.preventDefault()

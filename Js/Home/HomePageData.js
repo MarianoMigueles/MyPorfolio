@@ -48,8 +48,8 @@ async function initNavigarionBarContent() {
     const [
       professionalTitlePart1,
        professionalTitlePart2, 
-       professionTitlesList
-      ] = querySelectorMany('#profession-part1', '#profession-part2', '#profession-titles-list') 
+       /* professionTitlesList */
+      ] = querySelectorMany('#profession-part1', '#profession-part2'/* , '#profession-titles-list' */) 
     
     const title = navigationBarData.professionalTitle;
     const firstSpace = title.indexOf(' ');
@@ -60,7 +60,7 @@ async function initNavigarionBarContent() {
     professionalTitlePart1.innerHTML = part1;
     professionalTitlePart2.innerHTML = part2;
   
-    professionTitlesList.innerHTML = navigationBarData.professionTitleList.join(' - ');
+    /* professionTitlesList.innerHTML = navigationBarData.professionTitleList.join(' - '); */
   }
 
   function initNavBarButtons() {

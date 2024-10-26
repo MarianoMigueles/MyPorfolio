@@ -43,7 +43,7 @@
 main {
     width: 100%;
     padding: 1em;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 h1, h1 > span {

@@ -39,7 +39,7 @@ body {
     align-items: center;
     flex-direction: column;
     gap: .5em;
-    padding: 0 1em 0 2.5em;
+    padding: 0 1em 0 .5em /*2.5em*/;
 }
 
 .lateral-bar-container > .content-bar > div {
@@ -69,7 +69,7 @@ body {
 
 /*Professions knowledge animation*/
 
-.lateral-bar-container > .content-bar > .Professions-animation-container {
+/* .lateral-bar-container > .content-bar > .Professions-animation-container {
     position: absolute;
     align-items: end;
     justify-content: start;
@@ -86,7 +86,7 @@ body {
     transform: translate( -1em,-.5em);
     rotate: 90deg;
     max-width: 100%;
-}
+} */
 
 /*location style*/
 
@@ -194,7 +194,7 @@ html.dark .color-mode-container button img {
 
 .language-container {
     display: flex;
-    padding-left: 2em;
+    /* padding-left: 2em; */
     gap: .5em;
 }
 
