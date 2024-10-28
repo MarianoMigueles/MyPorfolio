@@ -13,7 +13,7 @@ body {
     width: fit-content;
     max-width: var(--max-width-lateral-bar);
     height: 100%;
-    --max-width-lateral-bar: 18em;
+    --max-width-lateral-bar: 16em;
 
     display: flex;
 
@@ -42,7 +42,7 @@ body {
     padding: 0 1em 0 .5em /*2.5em*/;
 }
 
-.lateral-bar-container > .content-bar > div {
+.content-bar > div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -63,7 +63,7 @@ body {
 
 /* <-- Content lateral bar --> */
 
-.lateral-bar-container > .content-bar > div span {
+.content-bar > div span {
     font-family: var(--fn-permanent-marker);
 }
 
@@ -90,14 +90,14 @@ body {
 
 /*location style*/
 
-.lateral-bar-container .location-container {
+.location-container {
     align-items: end;
     padding-right: 20px;
 }
 
 /*name style*/
 
-.lateral-bar-container .name-container {
+.name-container {
     align-items: start;
 
     h1 {
@@ -146,13 +146,10 @@ body {
 
 /*social buttons style*/
 
-.latelar-bar-buttons-container .social-icons-container {
+.social-icons-container {
     flex-direction: row;
-
     width: 100%;
     height: fit-content;
-
-    padding: 0 20px;
 }
 
 /*color mode button style*/
@@ -194,8 +191,8 @@ html.dark .color-mode-container button img {
 
 .language-container {
     display: flex;
-    /* padding-left: 2em; */
-    gap: .5em;
+    padding-left: 2em;
+    gap: .1em;
 }
 
 .language-container button {
@@ -234,7 +231,7 @@ html.dark .color-mode-container button img {
     transition: all .3s ease-in-out;
 }
 
- .lateral-bar-button-style:hover {
+.lateral-bar-button-style:hover {
     width: 2.5em;
 }
 
@@ -325,7 +322,7 @@ main {
     --js-scroll-background-width: 100px;
 }
 
-main::before {
+/* main::before {
     content: "";
     position: absolute;
     
@@ -342,11 +339,13 @@ main::before {
 
     opacity: .5;
     z-index: -1;
-}
+} */
 
-main > section, main > footer {
-    position: relative;
+main {
+    footer, section {
+        position: relative;
     grid-row: 2 / span 3;
+    } 
 }
 
 main h2 {
@@ -364,7 +363,7 @@ main h2 {
 /*About Section*/
 /*----------------------------------------------------------------------------------------*/
 
-section.about {
+.about {
     display: flex;
     gap: 50px;
 }
@@ -597,7 +596,7 @@ span.knowledge-dedication {
 /*Projects Section*/
 /*----------------------------------------------------------------------------------------*/
 
-section.projects {
+.projects {
     width: fit-content;
     display: flex;
     justify-content: start;
@@ -606,13 +605,13 @@ section.projects {
     margin-left: 50px;
 }
 
-section.projects > h2 {
+.projects > h2 {
     position: relative;
     text-align: center;
     right: -20px;
 }
 
-section.projects a {
+.projects a {
     position: relative;
     bottom: -40%;
     right: 5%;
@@ -684,12 +683,12 @@ section.projects a {
 /*Info Section*/
 /*----------------------------------------------------------------------------------------*/
 
-footer.info {
+.info {
     width: 600px;
     margin-left: 100px;
 }
 
-footer.info > div {
+.info > div {
     position: relative;
     width: 100%;
     height: 100%;
@@ -729,22 +728,4 @@ footer.info > div {
     top: 58%;
     left: 10%;
     letter-spacing: 10px;
-}
-
-footer.info .return-button {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 100px;
-    bottom: -35%;
-    right: 0;
-    border-right: 0;
-    border-bottom: 0;
-}
-
-footer.info .return-button span {
-    transform-origin: center;
-    transform: rotate(-40deg);
 }

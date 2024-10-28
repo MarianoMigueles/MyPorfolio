@@ -1,4 +1,4 @@
-import { querySelectorMany, initSocialIcons, initReturnButtons, translatedText } from '../CommonUtilities.js';
+import { querySelectorMany, initSocialIcons, translatedText } from '../CommonUtilities.js';
 import {
    GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
    GetMainProyectsInformation, GetInfoInformation, GetCurriculum, 
@@ -190,8 +190,6 @@ async function initInfoSectionContent() {
 
   phrasePart1.innerHTML = infoData.openingPhrase;
   phrasePart2.innerHTML = infoData.closingPhrase;
-
-  initReturnButtons()
 }
 
 async function initCurriculumLinks() {

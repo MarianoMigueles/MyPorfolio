@@ -34,6 +34,7 @@
 .return-button span {
     transform-origin: center;
     transform: rotate(-40deg);
+    font-family: var(--fn-permanent-marker);
 }
 
 /*----------------------------------------------------------------------------------------*/
@@ -43,7 +44,6 @@
 main {
     width: 100%;
     padding: 1em;
-    overflow-y: scroll;
 }
 
 h1, h1 > span {
@@ -59,6 +59,7 @@ h1 {
     flex-wrap: wrap;
     gap: 3vw;
     padding: 0 2vw;
+    overflow-y: auto;
 }
 
 .project-item {
@@ -94,7 +95,7 @@ h1 {
     height: fit-content;
 }
 
-.bottom-container .project-play-button {
+.project-play-button {
     display: flex;
     gap: .2em;
     padding: 2px;

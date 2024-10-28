@@ -73,7 +73,7 @@ export async function GetAboutInformation() {
     const aboutData = {
         aboutParagraphTitle: response[0].fields.title,
         aboutParagraph: response[0].fields.aboutMeText,
-        aboutImage: response[0].fields.myImage.fields.file.url,
+        aboutImage: response[0].fields.myImage.fields.file.url + '?w=800&h=600&fm=webp&q=80',
         aboutImageDescription: response[0].fields.myImage.fields.description
     }
 

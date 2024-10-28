@@ -140,15 +140,6 @@ a {
     color: inherit;
 }
 
-.return-button {
-    width: 120px;
-}
-
-.return-button span {
-    position: absolute;
-    font-family: var(--fn-permanent-marker);
-}
-
 /*---------Fonts Styles----------*/
 
 .oswald {

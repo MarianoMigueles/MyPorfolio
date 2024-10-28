@@ -80,7 +80,7 @@ function smoothScrollMenu() {
 
       const targetId = btn.getAttribute('data-section'); 
       const targetElement = document.querySelector(`#${targetId}`); 
-      const targetPosition = targetElement.getBoundingClientRect().left - 10;
+      const targetPosition = targetElement.getBoundingClientRect().left;
 
       btn.addEventListener('click', (e)=> {
           e.preventDefault()
@@ -121,12 +121,4 @@ function initLanguageButtons() {
       changePageLenguage(e.target.getAttribute('data-language'));p
     });
   });
-}
-
-////////////////////////////////////////////////////////////////////////////////////
-// Background animation
-////////////////////////////////////////////////////////////////////////////////////
-
-function scrollBackgroundAnimation(newWidth) {
-    main.style.setProperty('--js-scroll-background-width', newWidth + 'px');
 }

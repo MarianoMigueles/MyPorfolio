@@ -61,10 +61,6 @@ export function changePageLenguage(lenguague) {
   location.reload();
 }
 
-export function initReturnButtons() {
-  const returnButton = document.querySelector('.return-button>span');
-  returnButton.innerHTML = localStorage.getItem('language') === 'es' ? 'Volver' : 'Return';
-}
 
 ////////////////////////////////////////////////////////////////////////////////////
 // social links page funtions

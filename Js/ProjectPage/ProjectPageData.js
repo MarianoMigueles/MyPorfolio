@@ -1,4 +1,4 @@
-import { initSocialIcons, initReturnButtons, translatedText } from '../CommonUtilities.js'
+import { initSocialIcons, translatedText } from '../CommonUtilities.js'
 import { GetButtonsIcons, GetProyectsInformation } from '../ApiData/Contentful.js'
 
 document.addEventListener('DOMContentLoaded', initProjectPageData)
@@ -42,5 +42,11 @@ async function initProjectData() {
         `;
     }
     
+}
+
+
+function initReturnButtons() {
+    const returnButton = document.querySelector('.return-button>span');
+    returnButton.innerHTML = localStorage.getItem('language') === 'es' ? 'Volver' : 'Return';
 }
 
