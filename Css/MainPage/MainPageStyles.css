@@ -344,7 +344,7 @@ main {
 main {
     footer, section {
         position: relative;
-    grid-row: 2 / span 3;
+        grid-row: 2 / span 3;
     } 
 }
 
