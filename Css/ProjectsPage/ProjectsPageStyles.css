@@ -1,6 +1,16 @@
+
+body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
 /*----------------------------------------------------------------------------------------*/
 /*Lateral Bar*/
 /*----------------------------------------------------------------------------------------*/
+
+header {
+    position: fixed;
+}
 
 .social-button-container {
     display: flex;
@@ -44,6 +54,7 @@
 main {
     width: 100%;
     padding: 1em;
+    padding-left: 7em;
 }
 
 h1, h1 > span {
@@ -59,7 +70,6 @@ h1 {
     flex-wrap: wrap;
     gap: 3vw;
     padding: 0 2vw;
-    overflow-y: auto;
 }
 
 .project-item {
