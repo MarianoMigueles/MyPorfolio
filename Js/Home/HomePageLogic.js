@@ -34,10 +34,10 @@ function initColorModeButton() {
     function changeColorModeSelectedText() {
       if (document.documentElement.classList.contains('dark')) {
         translatedText('.mode-selected-container>.line1', 'Modo', 'Light' );
-        translatedText('.mode-selected-container>.line2', 'Claro', 'Mode');
+        translatedText('.mode-selected-container>.line2', 'Oscuro', 'Mode');
       } else {
         translatedText('.mode-selected-container>.line1', 'Modo', 'Dark' );
-        translatedText('.mode-selected-container>.line2', 'Oscuro', 'Mode');
+        translatedText('.mode-selected-container>.line2', 'Claro', 'Mode');
       }
     }
 }
@@ -72,12 +72,9 @@ function backgroundScroll(deltaY) {
 }
 
 function smoothScrollMenu() {
-  const btns = document.querySelectorAll('button');
-  const noScrollableButtons = ["menu-button", "color-mode-button", "language-button-spanish", "language-button-english"]; 
+  const btns = document.querySelectorAll('button.can-scroll');
   
   btns.forEach(btn => {
-      if(noScrollableButtons.includes(btn.id)) return;
-
       const targetId = btn.getAttribute('data-section'); 
       const targetElement = document.querySelector(`#${targetId}`); 
       const targetPosition = targetElement.getBoundingClientRect().left;

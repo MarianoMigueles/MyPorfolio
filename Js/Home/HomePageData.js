@@ -1,7 +1,7 @@
-import { querySelectorMany, initSocialIcons, translatedText } from '../CommonUtilities.js';
+import { querySelectorMany, initSocialIcons, translatedText, initCurriculumLinks } from '../CommonUtilities.js';
 import {
    GetNavigationBarInformation, GetAboutInformation, GetKnowledgeInformation,
-   GetMainProyectsInformation, GetInfoInformation, GetCurriculum, 
+   GetMainProyectsInformation, GetInfoInformation, 
    GetDecorationIcons, GetSkillsIcons, GetStudiesIcons
    } from '../ApiData/Contentful.js';
 
@@ -190,16 +190,6 @@ async function initInfoSectionContent() {
 
   phrasePart1.innerHTML = infoData.openingPhrase;
   phrasePart2.innerHTML = infoData.closingPhrase;
-}
-
-async function initCurriculumLinks() {
-  const curriculumData = await GetCurriculum();
-  
-  const cvLinks = document.querySelectorAll('.cv');
-
-  cvLinks.forEach(cv => {
-    cv.href = curriculumData;
-  });
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-import { GetSocialIcons } from './ApiData/Contentful.js';
+import { GetSocialIcons, GetCurriculum } from './ApiData/Contentful.js';
 
 //<--- Global fuctions --->
 
@@ -10,7 +10,7 @@ export function querySelectorMany(...selectors) {
 }
 
 export function translatedText(elementToTranslate = null, textSpanish, textEnglish) {
-  const txt = localStorage.getItem('language') === 'es' ? textSpanish : textEnglish;
+  const txt = localStorage.getItem('language') == 'es' ? textSpanish : textEnglish;
 
   if(elementToTranslate === null) {
     return txt;
@@ -99,4 +99,14 @@ export async function initSocialIcons(areMany = false) {
   }
 
   initSocialButtonIcon(gitHub, linkedin, mail, cv);
+}
+
+export async function initCurriculumLinks() {
+  const curriculumData = await GetCurriculum();
+  
+  const cvLinks = document.querySelectorAll('.cv');
+
+  cvLinks.forEach(cv => {
+    cv.href = curriculumData;
+  });
 }

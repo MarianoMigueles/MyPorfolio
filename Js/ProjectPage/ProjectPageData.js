@@ -1,4 +1,4 @@
-import { initSocialIcons, translatedText } from '../CommonUtilities.js'
+import { initSocialIcons, translatedText, initCurriculumLinks } from '../CommonUtilities.js'
 import { GetButtonsIcons, GetProyectsInformation } from '../ApiData/Contentful.js'
 
 document.addEventListener('DOMContentLoaded', initProjectPageData)
@@ -7,6 +7,7 @@ async function initProjectPageData() {
     await initProjectData()
     initSocialIcons(true)
     initReturnButtons()
+    initCurriculumLinks()
 }
 
 async function initProjectData() {

@@ -192,7 +192,7 @@ html.dark .color-mode-container button img {
 .language-container {
     display: flex;
     padding-left: 2em;
-    gap: .1em;
+    gap: .5em;
 }
 
 .language-container button {
